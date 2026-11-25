@@ -1002,6 +1002,7 @@ export default function CompileDeployTab({ registry, onInteract }: Props) {
   };
 
   const openInlineEdit = (prefill?: { line?: number | null; instruction?: string }) => {
+    if (inlineEdit && !prefill) return closeInlineEdit();
     const ed = editorRef.current;
     if (!ed) return;
     let range = ed.getSelectionRange();
@@ -1091,7 +1092,8 @@ export default function CompileDeployTab({ registry, onInteract }: Props) {
     const mod = e.metaKey || e.ctrlKey;
     const k = e.key.toLowerCase();
     if (e.key === "Escape") {
-      if (sheet || inlineEdit) return;
+      if (inlineEdit) return closeInlineEdit();
+      if (sheet) return;
       if (dockTab === "assistant" && (layout.docked || overlayShown) && chatRef.current?.escape())
         return;
       if (menu) return setMenu(false);
@@ -1491,8 +1493,10 @@ export default function CompileDeployTab({ registry, onInteract }: Props) {
                             e.preventDefault();
                             closeInlineEdit();
                           }
-                          if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "i")
+                          if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "i") {
                             e.preventDefault();
+                            closeInlineEdit();
+                          }
                         }}
                         placeholder={
                           inlineEdit.range.from === 0 && inlineEdit.range.to === source.length

@@ -43,6 +43,7 @@
 
 ### Fixed
 
+- Contract editor: Escape closes the inline edit box from anywhere in the editor, and Cmd I closes it again.
 - AI assistant: answers use the output limit each model reports (up to 64,000 tokens), so thinking models no longer cut off mid-answer; an answer that still stops at the limit says so.
 - AI assistant: questions and answers can be selected and copied, not only code blocks.
 - Unlock (and finishing a new wallet) could leave the lock screen up although the wallet was open; the app now moves on the first time.
