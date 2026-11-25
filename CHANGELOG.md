@@ -43,6 +43,7 @@
 
 ### Fixed
 
+- AI assistant: questions and answers can be selected and copied, not only code blocks.
 - Unlock (and finishing a new wallet) could leave the lock screen up although the wallet was open; the app now moves on the first time.
 - AI assistant: shows Thinking with seconds while the model reasons, and the wait only ends on real silence.
 - AI assistant: a provider that stays silent ends with "No answer from <provider>" after 90 seconds (60 seconds between parts), an error sent inside the answer is shown, and an empty answer says so, instead of loading forever.

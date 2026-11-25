@@ -1235,6 +1235,17 @@
   gap: 10px;
   min-width: 0;
 }
+.cw .msg-u,
+.cw .msg-b {
+  -webkit-user-select: text;
+  user-select: text;
+  cursor: text;
+}
+.cw .msg-b button {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
 .cw .msg-b .txt {
   white-space: pre-wrap;
   word-break: break-word;
