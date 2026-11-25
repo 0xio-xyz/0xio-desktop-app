@@ -1586,6 +1586,7 @@
   "contracts.ws.sugOptimize": "Optimalkan {{name}}",
   "contracts.ws.sugPrivacy": "Tambah privasi FHE",
   "contracts.ws.thinking": "Berpikir",
+  "contracts.ws.cut": "Terpotong di batas keluaran. Minta untuk melanjutkan.",
   "contracts.ws.today": "Hari ini",
   "contracts.ws.undo": "Urungkan",
   "contracts.ws.unsaved": "Belum disimpan",

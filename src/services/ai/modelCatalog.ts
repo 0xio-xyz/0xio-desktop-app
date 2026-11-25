@@ -15,7 +15,12 @@ type CatalogProvider = Exclude<ProviderType, "none">;
 interface ModelInfo {
   id: string;
   label: string;
+  /** Largest output the provider allows for this model, when its list says. */
+  maxOutput?: number;
 }
+
+const positive = (v: unknown): number | undefined =>
+  typeof v === "number" && Number.isFinite(v) && v > 0 ? Math.floor(v) : undefined;
 
 type CatalogStatus = "idle" | "loading" | "ok" | "error" | "none";
 
@@ -33,7 +38,7 @@ export const LOCAL_HOSTS: Record<string, string> = {
   lmstudio: "localhost:1234",
 };
 
-const CACHE_KEY = "ai_model_cache_v1";
+const CACHE_KEY = "ai_model_cache_v2";
 const STALE_MS = 6 * 60 * 60_000;
 const KEYED_TIMEOUT_MS = 15_000;
 const LOCAL_TIMEOUT_MS = 2_500;
@@ -60,7 +65,11 @@ export function parseModelList(provider: CatalogProvider, body: unknown): ModelI
     case "anthropic":
       return arr(d.data)
         .filter((m) => str(m.id) && (!m.type || m.type === "model"))
-        .map((m) => ({ id: str(m.id), label: str(m.display_name) || str(m.id) }));
+        .map((m) => ({
+          id: str(m.id),
+          label: str(m.display_name) || str(m.id),
+          maxOutput: positive(m.max_tokens),
+        }));
     case "openai":
       return arr(d.data)
         .filter((m) => str(m.id) && !NOT_CHAT_OPENAI.test(str(m.id)))
@@ -79,7 +88,11 @@ export function parseModelList(provider: CatalogProvider, body: unknown): ModelI
           const modality = str(a.modality);
           return !modality || modality.endsWith("->text") || modality.includes("->text");
         })
-        .map((m) => ({ id: str(m.id), label: str(m.id) }));
+        .map((m) => ({
+          id: str(m.id),
+          label: str(m.id),
+          maxOutput: positive(((m.top_provider ?? {}) as Json).max_completion_tokens),
+        }));
     case "ollama":
       return arr(d.models)
         .map((m) => str(m.name) || str(m.model))
@@ -294,6 +307,9 @@ export const modelCatalog = {
   },
   label(provider: string, id: string): string {
     return entries[provider]?.models.find((m) => m.id === id)?.label ?? id;
+  },
+  maxOutput(provider: string, id: string): number | undefined {
+    return entries[provider]?.models.find((m) => m.id === id)?.maxOutput;
   },
   subscribe(l: Listener) {
     listeners.add(l);

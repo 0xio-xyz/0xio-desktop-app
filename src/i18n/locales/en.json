@@ -1591,6 +1591,7 @@
   "contracts.ws.sugOptimize": "Optimize {{name}}",
   "contracts.ws.sugPrivacy": "Add FHE privacy",
   "contracts.ws.thinking": "Thinking",
+  "contracts.ws.cut": "Cut at the output limit. Ask it to continue.",
   "contracts.ws.today": "Today",
   "contracts.ws.undo": "Undo",
   "contracts.ws.unsaved": "Unsaved",

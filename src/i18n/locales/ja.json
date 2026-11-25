@@ -1586,6 +1586,7 @@
   "contracts.ws.sugOptimize": "{{name}} を最適化",
   "contracts.ws.sugPrivacy": "FHE プライバシーを追加",
   "contracts.ws.thinking": "考え中",
+  "contracts.ws.cut": "出力の上限で途切れました。続きを頼んでください。",
   "contracts.ws.today": "今日",
   "contracts.ws.undo": "元に戻す",
   "contracts.ws.unsaved": "未保存",

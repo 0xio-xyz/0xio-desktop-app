@@ -5,8 +5,18 @@ import {
   streamCompletion,
   complete,
 } from "src/services/ai/providerClient";
+import { modelCatalog } from "src/services/ai/modelCatalog";
 
 export type { ChatMessage };
+
+const DEFAULT_OUTPUT = 16000;
+const MAX_OUTPUT = 64000;
+
+// Thinking models spend the output budget on reasoning first, so use what the model allows.
+export function outputLimit(config: AISuggestionConfig): number {
+  const known = modelCatalog.maxOutput(config.provider, config.model || config.customModel || "");
+  return known ? Math.min(known, MAX_OUTPUT) : DEFAULT_OUTPUT;
+}
 
 export type AssistantMode = "manual" | "auto" | "plan";
 
@@ -109,6 +119,7 @@ interface ChatOptions {
   signal?: AbortSignal;
   onDelta?: (text: string) => void;
   onStatus?: (status: StreamStatus) => void;
+  onCut?: () => void;
 }
 
 export async function chatWithAI(
@@ -130,12 +141,13 @@ export async function chatWithAI(
   const full = [...system, ...trimHistory(messages)];
   if (opts.onDelta) {
     return streamCompletion(full, config, opts.onDelta, {
-      maxTokens: 16000,
+      maxTokens: outputLimit(config),
       signal: opts.signal,
       onStatus: opts.onStatus,
+      onCut: opts.onCut,
     });
   }
-  return complete(full, config, { maxTokens: 16000, signal: opts.signal });
+  return complete(full, config, { maxTokens: outputLimit(config), signal: opts.signal });
 }
 
 function extractCode(text: string): string {
@@ -181,8 +193,8 @@ This mode overrides the Apply rules above. The user selected a region of their $
     },
   ];
   const raw = onDelta
-    ? await streamCompletion(messages, config, onDelta, { maxTokens: 16000, signal })
-    : await complete(messages, config, { maxTokens: 16000, signal });
+    ? await streamCompletion(messages, config, onDelta, { maxTokens: outputLimit(config), signal })
+    : await complete(messages, config, { maxTokens: outputLimit(config), signal });
   return extractCode(raw);
 }
 
@@ -245,6 +257,6 @@ export async function auditContract(
       content: `Audit this ${language} contract:\n\`\`\`${language}\n${source}\n\`\`\``,
     },
   ];
-  const raw = await complete(messages, config, { maxTokens: 16000, signal });
+  const raw = await complete(messages, config, { maxTokens: outputLimit(config), signal });
   return parseFindings(raw);
 }

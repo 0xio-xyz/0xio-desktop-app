@@ -279,6 +279,7 @@ const AIChatPanel = forwardRef<AIChatHandle, Props>(function AIChatPanel(
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<StreamStatus | null>(null);
+  const [cut, setCut] = useState<ReadonlySet<number>>(() => new Set());
   const [mode, setMode] = useState<AssistantMode>(loadMode);
   const [applied, setApplied] = useState<Record<string, () => void>>({});
   const [copied, setCopied] = useState("");
@@ -362,6 +363,7 @@ const AIChatPanel = forwardRef<AIChatHandle, Props>(function AIChatPanel(
     curRef.current = id;
     setCur(id);
     setMessages(next);
+    setCut(new Set());
     setApplied({});
     setSwap((n) => n + 1);
     scrollDown();
@@ -458,6 +460,7 @@ const AIChatPanel = forwardRef<AIChatHandle, Props>(function AIChatPanel(
     const cfg = getConfig();
     if (!isAiReady(cfg)) return;
     const history: SavedMessage[] = [...messages, { role: "user", content: text }];
+    const at = history.length;
     const chat = curRef.current ?? newChatId();
     let reply = "";
     if (curRef.current === null) {
@@ -503,6 +506,7 @@ const AIChatPanel = forwardRef<AIChatHandle, Props>(function AIChatPanel(
           appendDelta(d);
         },
         onStatus: setStatus,
+        onCut: () => setCut((prev) => new Set(prev).add(at)),
       });
       keep(full);
       // Auto mode drives the editor: the reply carries the complete updated file.
@@ -717,6 +721,7 @@ const AIChatPanel = forwardRef<AIChatHandle, Props>(function AIChatPanel(
                     </div>
                   ),
                 )}
+                {cut.has(idx) && <p className="cut">{t("contracts.ws.cut")}</p>}
               </div>
             );
           })}

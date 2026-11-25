@@ -1586,6 +1586,7 @@
   "contracts.ws.sugOptimize": "优化 {{name}}",
   "contracts.ws.sugPrivacy": "添加 FHE 隐私",
   "contracts.ws.thinking": "思考中",
+  "contracts.ws.cut": "已在输出上限处截断。请让它继续。",
   "contracts.ws.today": "今天",
   "contracts.ws.undo": "撤销",
   "contracts.ws.unsaved": "未保存",

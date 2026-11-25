@@ -180,6 +180,19 @@ export function formatUsage(usage: Usage): string {
     .join(" ");
 }
 
+function extractStop(wire: "anthropic" | "openai", event: unknown): string | null {
+  const e = event as any;
+  if (wire === "anthropic") {
+    return e?.type === "message_delta" && e?.delta?.stop_reason
+      ? String(e.delta.stop_reason)
+      : null;
+  }
+  const r = e?.choices?.[0]?.finish_reason;
+  return r ? String(r) : null;
+}
+
+const CUT_REASONS = new Set(["max_tokens", "length"]);
+
 function extractText(wire: "anthropic" | "openai", data: unknown): string {
   const d = data as any;
   if (wire === "anthropic") {
@@ -228,6 +241,7 @@ export function parseSseChunk(
   onDelta: (text: string) => void,
   onThinking: () => void = () => {},
   onUsage: (usage: Usage) => void = () => {},
+  onStop: (reason: string) => void = () => {},
 ): string {
   // Some servers/proxies emit CRLF SSE; without this, deltas would only flush at stream end.
   const events = buffer.split(/\r?\n\r?\n/);
@@ -247,6 +261,8 @@ export function parseSseChunk(
       if (failed) throw new Error(failed);
       const usage = extractUsage(wire, event);
       if (usage) onUsage(usage);
+      const stop = extractStop(wire, event);
+      if (stop) onStop(stop);
       const delta = extractDelta(wire, event);
       if (delta) onDelta(delta);
       else if (isThinking(wire, event)) onThinking();
@@ -267,6 +283,8 @@ interface CompletionOptions {
   maxTokens?: number;
   signal?: AbortSignal;
   onStatus?: (status: StreamStatus) => void;
+  /** The answer stopped at the output limit. */
+  onCut?: () => void;
 }
 
 function resolveModel(config: AISuggestionConfig): string {
@@ -356,6 +374,10 @@ export async function streamCompletion(
   let firstByte = 0;
   const usage: Usage = {};
   const onUsage = (u: Usage) => Object.assign(usage, u);
+  let stopReason = "";
+  const onStop = (r: string) => {
+    stopReason = r;
+  };
   const setStatus = (next: StreamStatus) => {
     if (status === next) return;
     status = next;
@@ -409,13 +431,22 @@ export async function streamCompletion(
           collect,
           thinking,
           onUsage,
+          onStop,
         );
       }
-      parseSseChunk(buffer + "\n\n", req.wire, collect, thinking, onUsage);
+      parseSseChunk(buffer + "\n\n", req.wire, collect, thinking, onUsage, onStop);
     } else {
-      parseSseChunk((await res.text()) + "\n\n", req.wire, collect, thinking, onUsage);
+      parseSseChunk((await res.text()) + "\n\n", req.wire, collect, thinking, onUsage, onStop);
     }
-    if (!full) throw new Error(`${config.provider} returned an empty answer`);
+    const cut = CUT_REASONS.has(stopReason);
+    if (cut) logger.warn("ai", `${config.provider} ${model} stopped at the output limit`);
+    if (!full)
+      throw new Error(
+        cut
+          ? `${config.provider} used the whole output limit before answering. Ask again or pick another model.`
+          : `${config.provider} returned an empty answer`,
+      );
+    if (cut) opts.onCut?.();
     logger.info("ai", `${config.provider} ${model} answered in ${Date.now() - started} ms`);
     return full;
   } catch (err) {
