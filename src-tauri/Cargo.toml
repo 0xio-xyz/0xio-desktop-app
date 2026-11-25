@@ -1,0 +1,91 @@
+[package]
+name = "oxio-desktop"
+version = "0.7.4"
+edition = "2021"
+description = "0xio Desktop wallet and PVAC proof engine"
+license = "MIT"
+authors = ["0xio Team"]
+
+[lib]
+name = "oxio_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "oxio-desktop"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2.7", features = [] }
+
+[dependencies]
+tauri = { version = "2.12", features = ["tray-icon", "image-png", "macos-private-api"] }
+tauri-plugin-shell = "2"
+tauri-plugin-store = "2"
+tauri-plugin-http = "2"
+tauri-plugin-updater = "2"
+tauri-plugin-dialog = "2"
+# 2.6 and later report clicks on desktop.
+tauri-plugin-notification = "2.7"
+tokio = { version = "1", features = ["full"] }
+tokio-tungstenite = "0.24"
+futures-util = "0.3"
+pvac-rs = { path = "../../pvac-rs", version = "0.3", default-features = false }
+pvac-handler = { path = "../../pvac-handler", version = "0.2" }
+rayon = "1.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+
+aes-gcm = "0.10"
+pbkdf2 = { version = "0.12", features = ["hmac"] }
+sha2 = "0.10"
+hmac = "0.12"
+bip39 = "2"
+rand = "0.8"
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+# X25519 for pairing with the extension (already in the tree through ed25519-dalek).
+curve25519-dalek = "4"
+zeroize = "1"
+libc = "0.2"
+url = "2"
+
+# Crypto crates stay optimized in dev builds: PBKDF2 and AES are 10-20x slower unoptimized.
+[profile.dev.package.pbkdf2]
+opt-level = 3
+[profile.dev.package.sha2]
+opt-level = 3
+[profile.dev.package.aes-gcm]
+opt-level = 3
+[profile.dev.package.hmac]
+opt-level = 3
+[profile.dev.package.ed25519-dalek]
+opt-level = 3
+[profile.dev.package.curve25519-dalek]
+opt-level = 3
+[profile.dev.package.pvac-rs]
+opt-level = 3
+[profile.dev.package.pvac-handler]
+opt-level = 3
+
+[profile.release]
+lto = true
+opt-level = 3
+codegen-units = 1
+strip = true
+panic = "abort"
+
+# The menu bar panel must float over full-screen apps like a native status item panel; Tauri does
+# not expose NSWindow collection behaviour. These crates are already in the tree through Tauri.
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "0.6"
+block2 = "0.6"
+objc2-app-kit = { version = "0.3", default-features = false, features = ["std", "NSResponder", "NSWindow", "NSPanel", "NSImage", "NSPasteboard", "NSStatusItem", "NSStatusBarButton", "NSButton", "NSControl", "NSView", "NSApplication", "NSSavePanel", "NSOpenPanel"] }
+objc2-foundation = { version = "0.3", default-features = false, features = ["std", "block2", "NSBundle", "NSData", "NSError", "NSGeometry", "NSString", "NSArray", "NSURL"] }
+# Touch ID unlock: its own keychain item and fingerprint prompt (src/wallet/touch_id.rs).
+objc2-core-foundation = "0.3"
+objc2-security = "0.3"
+objc2-local-authentication = { version = "0.3", features = ["LAContext", "LAError", "block2"] }
+
+# Windows Hello unlock (src/wallet/touch_id.rs); the same version Tauri already builds.
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = { version = "0.62", features = ["Foundation", "Security_Credentials", "Security_Credentials_UI", "Security_Cryptography", "Security_Cryptography_Core", "Storage_Streams", "Win32_Foundation", "Win32_UI_WindowsAndMessaging"] }

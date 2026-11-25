@@ -1,0 +1,13 @@
+[[set]]
+identifier = "tray-window"
+description = "The menu bar panel: read the published state and ask the main window for changes. No wallet, PVAC or file commands."
+permissions = [
+  "allow-tray-get-state",
+  "allow-tray-action",
+  "allow-tray-unlock",
+  "allow-tray-approve-send",
+  "allow-tray-hide",
+  "allow-site-queue",
+  "allow-site-answer",
+  "allow-site-reject",
+]

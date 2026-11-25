@@ -1,0 +1,217 @@
+/* The extension look, scoped to [data-look="ext"]. A custom property resolves where it is declared,
+   so every desktop alias and Tailwind token is declared again inside the scope. */
+
+[data-look="ext"] {
+  --bg: #090909;
+  --bg-1: #131313;
+  --bg-2: #1b1b1b;
+  --bg-3: #262626;
+  --hover: #0f0f0f;
+  --line: #1f1f1f;
+  --line-2: #2e2e2e;
+  --fg: #f5f5f5;
+  --fg-2: #bdbdbd;
+  --fg-3: #8f8f8f;
+  --accent: #f5f5f5;
+  --accent-fg: #090909;
+  --accent-text: var(--accent);
+  --pos: #5dd39e;
+  --neg: #ef6b6b;
+  --overlay: rgba(9, 9, 9, 0.75);
+  --key-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 10px 24px -10px rgba(255, 255, 255, 0.16),
+    0 2px 6px rgba(0, 0, 0, 0.5);
+  --raise-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 40px -18px rgba(0, 0, 0, 0.9),
+    0 2px 6px rgba(0, 0, 0, 0.45);
+
+  --bg-main: var(--bg);
+  --bg-card: var(--bg-1);
+  --bg-card-2: var(--bg-2);
+  --bg-recessed: var(--bg-1);
+  --bg-input: var(--bg-2);
+  --bg-highlight: var(--bg-2);
+  --bg-overlay: var(--overlay);
+  --text-main: var(--fg);
+  --text-secondary: var(--fg-2);
+  --text-muted: var(--fg-3);
+  --text-faint: var(--line-2);
+  --text-inverse: var(--accent-fg);
+  --primary: var(--accent-text);
+  --primary-hover: color-mix(in oklab, var(--accent-text) 80%, var(--bg));
+  --primary-fg: var(--accent-fg);
+  --primary-glow: color-mix(in oklab, var(--accent-text) 20%, transparent);
+  --success: var(--pos);
+  --error: var(--neg);
+  --warning: var(--fg-2);
+  --info: var(--accent-text);
+  --private-asset: var(--accent-text);
+  --private-asset-bg: color-mix(in oklab, var(--accent-text) 12%, transparent);
+  --private-asset-border: color-mix(in oklab, var(--accent-text) 20%, transparent);
+  --public-asset: var(--pos);
+  --public-asset-bg: color-mix(in oklab, var(--pos) 12%, transparent);
+  --public-asset-border: color-mix(in oklab, var(--pos) 20%, transparent);
+  --border-color: var(--line);
+  --border-strong: var(--line-2);
+  --border-active: var(--line-2);
+
+  --color-surface: var(--bg-main);
+  --color-surface-card: var(--bg-card);
+  --color-surface-card-2: var(--bg-card-2);
+  --color-surface-recessed: var(--bg-recessed);
+  --color-surface-input: var(--bg-input);
+  --color-surface-highlight: var(--bg-highlight);
+  --color-surface-overlay: var(--bg-overlay);
+  --color-content: var(--text-main);
+  --color-content-secondary: var(--text-secondary);
+  --color-content-muted: var(--text-muted);
+  --color-content-faint: var(--text-faint);
+  --color-content-inverse: var(--text-inverse);
+  --color-accent: var(--primary);
+  --color-accent-hover: var(--primary-hover);
+  --color-accent-fg: var(--primary-fg);
+  --color-accent-soft: var(--primary-glow);
+  --color-danger: var(--error);
+  --color-positive: var(--success);
+  --color-caution: var(--warning);
+  --color-info: var(--info);
+  --color-edge: var(--border-color);
+  --color-edge-strong: var(--border-strong);
+  --color-edge-active: var(--border-active);
+  --color-asset-private: var(--private-asset);
+  --color-asset-private-bg: var(--private-asset-bg);
+  --color-asset-private-border: var(--private-asset-border);
+  --color-asset-public: var(--public-asset);
+  --color-asset-public-bg: var(--public-asset-bg);
+  --color-asset-public-border: var(--public-asset-border);
+
+  color: var(--fg);
+}
+
+:root[data-theme="light"] [data-look="ext"] {
+  --bg: #f6f7fb;
+  --bg-1: #ffffff;
+  --bg-2: #f0f1f6;
+  --bg-3: #e6e8ef;
+  --hover: #eef0f5;
+  --line: #dfe1ea;
+  --line-2: #c4c7d2;
+  --fg: #161821;
+  --fg-2: #585c69;
+  --fg-3: #696c77;
+  --accent: #2c4ce0;
+  --accent-fg: #ffffff;
+  --pos: #1a8a5c;
+  --neg: #c8392b;
+  --overlay: rgba(22, 24, 33, 0.45);
+  --key-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.18);
+  --raise-shadow: 0 12px 30px -16px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="octra"] [data-look="ext"] {
+  --bg: #0e0f3e;
+  --bg-1: #161858;
+  --bg-2: #1f2070;
+  --bg-3: #292a86;
+  --hover: #121350;
+  --line: #2e308a;
+  --line-2: #4144ab;
+  --fg: #f6f8fc;
+  --fg-2: #bcc4d6;
+  --fg-3: #8f97b3;
+  --accent: #0000db;
+  --accent-fg: #ffffff;
+  --accent-text: #7aa2ff;
+  --pos: #6ed8a4;
+  --neg: #f08070;
+  --overlay: rgba(14, 15, 62, 0.85);
+  --key-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.5);
+  --raise-shadow: 0 12px 30px -16px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+:root [data-look="ext"] .oxio-mascot {
+  --mascot-body: var(--fg);
+}
+
+:root[data-theme="octra"] [data-look="ext"] .look-logo {
+  filter: brightness(0) invert(1);
+}
+
+[data-look="ext"] .tab-caps {
+  font-size: 0.65625rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+[data-look="ext"] .look-figure {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+[data-look="ext"] .look-key {
+  background-color: var(--fg);
+  color: var(--bg);
+  box-shadow: var(--key-shadow);
+}
+
+[data-look="ext"] .look-raise {
+  box-shadow: var(--raise-shadow);
+}
+
+[data-look="ext"] .look-plate {
+  background:
+    radial-gradient(
+      circle at 85% 5%,
+      color-mix(in srgb, var(--fg) 7%, transparent),
+      transparent 23%
+    ),
+    linear-gradient(160deg, var(--bg-2), var(--bg));
+}
+
+[data-look="ext"] .look-plate-off {
+  background: var(--bg-1);
+}
+
+[data-look="ext"] .look-tag {
+  animation: look-tag-in 240ms cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+@keyframes look-tag-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-look="ext"] .look-tag {
+    animation: none;
+  }
+}
+
+@keyframes look-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
+[data-look="ext"] .look-shake {
+  animation: look-shake 280ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-look="ext"] .look-shake {
+    animation: none;
+  }
+}

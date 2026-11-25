@@ -1,0 +1,47 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "main-window",
+    "core:default",
+    "shell:allow-open",
+    "core:window:allow-close",
+    "core:window:allow-hide",
+    "core:window:allow-show",
+    "core:window:allow-set-focus",
+    "core:window:allow-set-always-on-top",
+    "core:window:allow-request-user-attention",
+    "core:window:allow-unminimize",
+    "dialog:default",
+    "store:default",
+    "notification:allow-is-permission-granted",
+    {
+      "identifier": "http:default",
+      "allow": [
+        {
+          "url": "https://*"
+        },
+        {
+          "url": "https://*:*"
+        },
+        {
+          "url": "http://localhost"
+        },
+        {
+          "url": "http://localhost:*"
+        },
+        {
+          "url": "http://127.0.0.1"
+        },
+        {
+          "url": "http://127.0.0.1:*"
+        }
+      ]
+    },
+    "updater:default"
+  ]
+}

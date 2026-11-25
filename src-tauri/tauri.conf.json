@@ -1,0 +1,66 @@
+{
+  "productName": "0xio Desktop",
+  "version": "0.7.4",
+  "identifier": "com.0xio.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "macOSPrivateApi": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "0xio Desktop",
+        "width": 960,
+        "height": 680,
+        "minWidth": 800,
+        "minHeight": 600,
+        "center": true,
+        "resizable": true,
+        "decorations": true,
+        "visible": true,
+        "backgroundColor": "#090909",
+        "dragDropEnabled": false,
+        "backgroundThrottling": "disabled"
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cdn.jsdelivr.net https://*.ipfs.io https://gateway.pinata.cloud https://dweb.link; connect-src 'self' https://octra.network https://devnet.octrascan.io https://push.0xio.xyz https://oracle.0xio.xyz https://rpc-proxy.0xio.xyz https://alpha.0xio.xyz https://octrascan.com https://api.coingecko.com https://*.ipfs.io https://cdn.jsdelivr.net https://gateway.pinata.cloud https://dweb.link ws://127.0.0.1:19345 ipc: http://ipc.localhost; frame-src https: http://localhost:* http://127.0.0.1:*"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "13.0",
+      "signingIdentity": "Developer ID Application: 0XIO LABS PTE. LTD. (RR378JW9N7)",
+      "entitlements": "Entitlements.plist",
+      "files": { "embedded.provisionprofile": "embedded.provisionprofile" },
+      "dmg": {
+        "windowSize": { "width": 660, "height": 400 },
+        "appPosition": { "x": 180, "y": 170 },
+        "applicationFolderPosition": { "x": 480, "y": 170 }
+      }
+    },
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "updater": {
+      "endpoints": [
+        "https://0xio.xyz/api/updates?target={{target}}&arch={{arch}}&current_version={{current_version}}"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDI0QUUwMzZBMzFDRTg3RTcKUldUbmg4NHhhZ091Sk9mc3pJTlE4cEhVRm5zaWNiTXZvTDVzd3hobXJLYjBnWUdIS282Q2R1WFAK",
+      "requireSignedVersion": true
+    }
+  }
+}

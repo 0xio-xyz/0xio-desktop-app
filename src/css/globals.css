@@ -1,0 +1,314 @@
+@import "tailwindcss";
+@import "./fonts.css";
+@import "./boot.css";
+
+@theme {
+  --color-surface: var(--bg-main);
+  --color-surface-card: var(--bg-card);
+  --color-surface-card-2: var(--bg-card-2);
+  --color-surface-recessed: var(--bg-recessed);
+  --color-surface-input: var(--bg-input);
+  --color-surface-highlight: var(--bg-highlight);
+  --color-surface-overlay: var(--bg-overlay);
+
+  --color-content: var(--text-main);
+  --color-content-secondary: var(--text-secondary);
+  --color-content-muted: var(--text-muted);
+  --color-content-faint: var(--text-faint);
+  --color-content-inverse: var(--text-inverse);
+
+  --color-accent: var(--primary);
+  --color-accent-hover: var(--primary-hover);
+  --color-accent-fg: var(--primary-fg);
+  --color-accent-soft: var(--primary-glow);
+
+  --color-danger: var(--error);
+  --color-positive: var(--success);
+  --color-caution: var(--warning);
+  --color-info: var(--info);
+
+  --color-edge: var(--border-color);
+  --color-edge-strong: var(--border-strong);
+  --color-edge-active: var(--border-active);
+
+  --color-asset-private: var(--private-asset);
+  --color-asset-private-bg: var(--private-asset-bg);
+  --color-asset-private-border: var(--private-asset-border);
+  --color-asset-public: var(--public-asset);
+  --color-asset-public-bg: var(--public-asset-bg);
+  --color-asset-public-border: var(--public-asset-border);
+
+  /* Semantic type scale, in rem so every size follows the fluid root size. */
+  --text-micro: 0.6875rem;
+  --text-meta: 0.78125rem;
+  --text-body: 0.875rem;
+  --text-lead: 0.9375rem;
+  --text-title: 1.125rem;
+}
+
+/* The root font size drives every rem-based size, so the UI follows the window. The smaller of width
+   and height wins (a short, wide window has no room for large type); 16px lands near 1440x900. */
+:root {
+  font-size: clamp(14px, min(1.11111vw, 2.1vh), 17px);
+}
+
+@layer base {
+  :root {
+    --bg-main: #141519;
+    --bg-card: #1d1e24;
+    --bg-card-2: #25262e;
+    --bg-recessed: #0f1014;
+    --bg-input: #25262e;
+    --bg-highlight: #25262e;
+    --bg-overlay: rgba(0, 0, 0, 0.7);
+
+    --text-main: #eceef3;
+    --text-secondary: #9a9fad;
+    --text-muted: #858a98;
+    --text-faint: #565863;
+    --text-inverse: #141519;
+
+    --primary: #7aa2ff;
+    --primary-hover: #5b8bff;
+    --primary-fg: #141519;
+    --primary-glow: rgba(122, 162, 255, 0.15);
+
+    --success: #5dd39e;
+    --error: #ef6b6b;
+    --warning: #d4a017;
+    --info: #7aa2ff;
+
+    --private-asset: #7aa2ff;
+    --private-asset-dark: #a3c0ff;
+    --private-asset-bg: rgba(122, 162, 255, 0.1);
+    --private-asset-border: rgba(122, 162, 255, 0.2);
+    --public-asset: #5dd39e;
+    --public-asset-bg: rgba(93, 211, 158, 0.1);
+    --public-asset-border: rgba(93, 211, 158, 0.2);
+
+    --border-color: #2c2d36;
+    --border-strong: #3c3d48;
+    --border-active: #7aa2ff;
+
+    --font-mono: "JetBrains Mono", "SF Mono", "Consolas", "Courier New", monospace;
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  [data-theme="light"] {
+    --bg-main: #f0f2ff;
+    --bg-card: #ffffff;
+    --bg-recessed: #e4e7fb;
+    --bg-input: #e8ebff;
+    --bg-highlight: #dde1ff;
+    --bg-overlay: rgba(0, 0, 100, 0.45);
+
+    --text-main: #0a0a2e;
+    --text-secondary: #333366;
+    --text-muted: #6969a0;
+    --text-inverse: #ffffff;
+
+    --primary: #0000db;
+    --primary-hover: #0000b0;
+    --primary-fg: #ffffff;
+    --primary-glow: rgba(0, 0, 219, 0.25);
+
+    --success: #059669;
+    --error: #dc2626;
+    --warning: #d97706;
+    --info: #0000db;
+
+    --private-asset: #7c3aed;
+    --private-asset-dark: #8b5cf6;
+    --private-asset-bg: rgba(124, 58, 237, 0.08);
+    --private-asset-border: rgba(124, 58, 237, 0.18);
+    --public-asset: #0000db;
+    --public-asset-bg: rgba(0, 0, 219, 0.08);
+    --public-asset-border: rgba(0, 0, 219, 0.18);
+
+    --border-color: rgba(0, 0, 219, 0.15);
+    --border-active: #0000db;
+  }
+
+  [data-theme="octra"] {
+    --bg-main: #0000db;
+    --bg-card: rgba(255, 255, 255, 0.08);
+    --bg-recessed: rgba(0, 0, 0, 0.22);
+    --bg-input: rgba(0, 0, 0, 0.2);
+    --bg-highlight: rgba(255, 255, 255, 0.12);
+    --bg-overlay: rgba(0, 0, 80, 0.85);
+
+    --text-main: #ffffff;
+    --text-secondary: #99ccff;
+    --text-muted: #6699cc;
+    --text-inverse: #0000db;
+
+    --primary: #00d4ff;
+    --primary-hover: #33ddff;
+    --primary-fg: #000022;
+    --primary-glow: rgba(0, 212, 255, 0.2);
+
+    --success: #34d399;
+    --error: #f87171;
+    --warning: #fbbf24;
+    --info: #38bdf8;
+
+    --private-asset: #a78bfa;
+    --private-asset-dark: #c4b5fd;
+    --private-asset-bg: rgba(167, 139, 250, 0.12);
+    --private-asset-border: rgba(167, 139, 250, 0.2);
+    --public-asset: #38bdf8;
+    --public-asset-bg: rgba(56, 189, 248, 0.12);
+    --public-asset-border: rgba(56, 189, 248, 0.2);
+
+    --border-color: rgba(0, 212, 255, 0.12);
+    --border-active: #00d4ff;
+  }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    border-color: var(--border-color);
+  }
+
+  /* Chrome is unselectable like a native window; anything the user needs to copy opts back in below. */
+  :root {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  input,
+  textarea,
+  [contenteditable="true"],
+  code,
+  pre,
+  .font-mono {
+    -webkit-user-select: text;
+    user-select: text;
+    cursor: auto;
+  }
+
+  img,
+  svg {
+    -webkit-user-drag: none;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    /* Kill trackpad side-swipe -> history back/forward (webview overscroll navigation). */
+    overscroll-behavior-x: none;
+    font-family: var(--font-sans);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  input,
+  textarea,
+  select {
+    background-color: var(--bg-input);
+    color: var(--text-main);
+    border-color: var(--border-color);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--bg-input);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+
+  button,
+  [role="button"],
+  a,
+  select,
+  summary {
+    cursor: pointer;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none !important;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+
+  /* The fade's end closes the Undo bar. */
+  .nft-undo {
+    animation:
+      nft-undo-in 220ms ease-out,
+      nft-undo-out 250ms ease-in 4s forwards;
+  }
+  @keyframes nft-undo-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+  @keyframes nft-undo-out {
+    to {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nft-undo {
+      animation: nft-undo-out 1ms linear 4s forwards;
+    }
+  }
+
+  /* Fades out before it unmounts at 1.5s. */
+  .pair-done {
+    animation:
+      pair-done-in 220ms ease-out,
+      pair-done-out 200ms ease-out 1300ms forwards;
+  }
+  @keyframes pair-done-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes pair-done-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pair-done {
+      animation: none;
+    }
+  }
+}

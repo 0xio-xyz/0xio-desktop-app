@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1142 922" width="1142" height="922" role="img" aria-labelledby="t d">
+  <title id="t">0xio Desktop architecture</title>
+  <desc id="d">In the browser, a website reaches 0xio Desktop through the 0xio extension, which relays its requests over a paired session on the local socket, or connects to the local socket straight from its own origin. Inside 0xio Desktop the Rust core holds the vault, signs and runs the PVAC engine. The main window, the menu bar panel and dApp windows call the Rust core through commands and events; the local socket queues site requests for review. The Rust core sends JSON-RPC to Octra nodes, and the main window reads prices and token lists from 0xio services.</desc>
+  <defs>
+    <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0 L10 5 L0 10 Z"/></marker>
+    <marker id="mn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="nh" d="M0 0 L10 5 L0 10 Z"/></marker>
+    <style>
+      .bg { fill: #ffffff; }
+      .z { fill: #f3f5f8; }
+      .zx { fill: #eef0fd; }
+      .box { fill: #ffffff; }
+      .zt { font: 600 13px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: #59636e; letter-spacing: 0.2px; }
+      .mk { fill: #0000db; }
+      .h { font: 600 15px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: #1f2328; }
+      .b { font: 400 13.5px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: #424a53; }
+      .m { font: 400 12.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #0000db; }
+      .ea { stroke: #0000db; stroke-width: 1.75; fill: none; }
+      .en { stroke: #6e7781; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+      .ah { fill: #0000db; }
+      .nh { fill: #6e7781; }
+      .pa { fill: #0000db; }
+      .pn { fill: #e6e9ee; }
+      .ta { font: 600 12px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: #ffffff; }
+      .tn { font: 600 12px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: #424a53; }
+      .lg { font: 400 12.5px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: #59636e; }
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #0d1117; }
+        .z { fill: #121820; }
+        .zx { fill: #141b33; }
+        .box { fill: #161b22; }
+        .zt { fill: #9198a1; }
+        .mk { fill: #5b7cff; }
+        .h { fill: #e6edf3; }
+        .b { fill: #b7bfc8; }
+        .m { fill: #7d97ff; }
+        .ea { stroke: #5b7cff; }
+        .en { stroke: #8b949e; }
+        .ah { fill: #5b7cff; }
+        .nh { fill: #8b949e; }
+        .pa { fill: #3d5cf0; }
+        .pn { fill: #262d36; }
+        .tn { fill: #c9d1d9; }
+        .lg { fill: #9198a1; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1142" height="922" rx="14"/>
+  <rect class="z" x="426" y="16" width="700" height="192" rx="16"/>
+  <text class="zt" x="446" y="44">Your browser</text>
+  <rect class="zx" x="16" y="248" width="1110" height="384" rx="16"/>
+  <g transform="translate(34,261) scale(0.2)"><path class="mk" fill-rule="evenodd" d="M 30 14 H 70 A 12 12 0 0 1 82 26 V 41 C 82 45.95 85.96 50 94 50 C 85.96 50 82 54.05 82 59 V 74 A 12 12 0 0 1 70 86 H 30 A 12 12 0 0 1 18 74 V 59 C 18 54.05 14.04 50 6 50 C 14.04 50 18 45.95 18 41 V 26 A 12 12 0 0 1 30 14 Z M 46.5533 74.2718 L 64.5533 30.2718 A 6 6 0 0 0 61.2718 22.4467 A 6 6 0 0 0 53.4467 25.7282 L 35.4467 69.7282 A 6 6 0 0 0 38.7282 77.5533 A 6 6 0 0 0 46.5533 74.2718 Z"/></g>
+  <text class="zt" x="58" y="276">0xio Desktop</text>
+  <rect class="z" x="426" y="672" width="700" height="192" rx="16"/>
+  <text class="zt" x="446" y="700">Outside</text>
+  <rect class="box" x="446" y="60" width="250" height="128" rx="12"/>
+  <text class="h" x="466" y="92">Websites</text>
+  <text class="m" x="466" y="114">@0xio/sdk</text>
+  <text class="b" x="466" y="138">dApps in any browser</text>
+  <text class="b" x="466" y="157">through the extension</text>
+  <text class="b" x="466" y="176">or straight to the socket</text>
+  <rect class="box" x="856" y="60" width="250" height="128" rx="12"/>
+  <text class="h" x="876" y="92">0xio extension</text>
+  <text class="m" x="876" y="114">0xio-site-relay-v1</text>
+  <text class="b" x="876" y="138">carries a site's requests</text>
+  <text class="b" x="876" y="157">names the site itself</text>
+  <text class="b" x="876" y="176">never signs for it</text>
+  <rect class="box" x="36" y="292" width="250" height="128" rx="12"/>
+  <text class="h" x="56" y="324">Menu bar panel</text>
+  <text class="m" x="56" y="346">src/tray/</text>
+  <text class="b" x="56" y="370">site reviews</text>
+  <text class="b" x="56" y="389">balance and quick actions</text>
+  <text class="b" x="56" y="408">no wallet or PVAC commands</text>
+  <rect class="box" x="446" y="292" width="250" height="128" rx="12"/>
+  <text class="h" x="466" y="324">Rust core</text>
+  <text class="m" x="466" y="346">src-tauri/src/</text>
+  <text class="b" x="466" y="370">vault, keys and signing</text>
+  <text class="b" x="466" y="389">native PVAC engine</text>
+  <text class="b" x="466" y="408">window guards and site frames</text>
+  <rect class="box" x="856" y="292" width="250" height="128" rx="12"/>
+  <text class="h" x="876" y="324">Local socket</text>
+  <text class="m" x="876" y="346">ws://127.0.0.1:19345</text>
+  <text class="b" x="876" y="370">pairing (0xio-pair-v1)</text>
+  <text class="b" x="876" y="389">site queue and records</text>
+  <text class="b" x="876" y="408">proofs for the extension</text>
+  <rect class="box" x="36" y="484" width="250" height="128" rx="12"/>
+  <text class="h" x="56" y="516">dApp windows</text>
+  <text class="m" x="56" y="538">src-tauri/src/dapp/</text>
+  <text class="b" x="56" y="562">https and oct:// pages</text>
+  <text class="b" x="56" y="581">injected wallet provider</text>
+  <text class="b" x="56" y="600">bridge command only</text>
+  <rect class="box" x="446" y="484" width="250" height="128" rx="12"/>
+  <text class="h" x="466" y="516">Main window</text>
+  <text class="m" x="466" y="538">src/App.tsx</text>
+  <text class="b" x="466" y="562">screens and reviews</text>
+  <text class="b" x="466" y="581">in-app browser and Circles</text>
+  <text class="b" x="466" y="600">builds every transaction</text>
+  <rect class="box" x="446" y="716" width="250" height="128" rx="12"/>
+  <text class="h" x="466" y="748">0xio services</text>
+  <text class="m" x="466" y="770">oracle.0xio.xyz</text>
+  <text class="b" x="466" y="794">OCT price</text>
+  <text class="b" x="466" y="813">token, NFT and name lists</text>
+  <text class="b" x="466" y="832">signed updates</text>
+  <rect class="box" x="856" y="716" width="250" height="128" rx="12"/>
+  <text class="h" x="876" y="748">Octra nodes</text>
+  <text class="m" x="876" y="770">src/services/network/</text>
+  <text class="b" x="876" y="794">mainnet and devnet</text>
+  <text class="b" x="876" y="813">nodes you add</text>
+  <text class="b" x="876" y="832">JSON-RPC with retries</text>
+  <path class="en" d="M 698 124 L 854 124" marker-start="url(#mn)" marker-end="url(#mn)"/>
+  <path class="en" d="M 571 190 L 571 218 Q 571 228 581 228 L 876 228 Q 886 228 886 238 L 886 290" marker-start="url(#mn)" marker-end="url(#mn)"/>
+  <path class="en" d="M 1011 190 L 1011 290" marker-start="url(#mn)" marker-end="url(#mn)"/>
+  <path class="ea" d="M 288 356 L 444 356" marker-start="url(#ma)" marker-end="url(#ma)"/>
+  <path class="ea" d="M 854 356 L 698 356" marker-start="url(#ma)" marker-end="url(#ma)"/>
+  <path class="ea" d="M 571 422 L 571 482" marker-start="url(#ma)" marker-end="url(#ma)"/>
+  <path class="ea" d="M 161 482 L 161 462 Q 161 452 171 452 L 466 452 Q 476 452 476 442 L 476 422" marker-start="url(#ma)" marker-end="url(#ma)"/>
+  <path class="en" d="M 666 422 L 666 442 Q 666 452 676 452 L 971 452 Q 981 452 981 462 L 981 714" marker-start="url(#mn)" marker-end="url(#mn)"/>
+  <path class="en" d="M 571 614 L 571 714" marker-start="url(#mn)" marker-end="url(#mn)"/>
+  <rect class="pn" x="728" y="113" width="96" height="22" rx="11"/>
+  <text class="tn" x="776" y="128" text-anchor="middle">window.octra</text>
+  <rect class="pn" x="680" y="217" width="96" height="22" rx="11"/>
+  <text class="tn" x="728" y="232" text-anchor="middle">direct sites</text>
+  <rect class="pn" x="963" y="217" width="96" height="22" rx="11"/>
+  <text class="tn" x="1011" y="232" text-anchor="middle">0xio-pair-v1</text>
+  <rect class="pa" x="321" y="345" width="90" height="22" rx="11"/>
+  <text class="ta" x="366" y="360" text-anchor="middle">tray_action</text>
+  <rect class="pa" x="734.5" y="345" width="83" height="22" rx="11"/>
+  <text class="ta" x="776" y="360" text-anchor="middle">site queue</text>
+  <rect class="pa" x="507" y="441" width="128" height="22" rx="11"/>
+  <text class="ta" x="571" y="456" text-anchor="middle">invoke and events</text>
+  <rect class="pa" x="267" y="441" width="90" height="22" rx="11"/>
+  <text class="ta" x="312" y="456" text-anchor="middle">dapp bridge</text>
+  <rect class="pn" x="946" y="537" width="70" height="22" rx="11"/>
+  <text class="tn" x="981" y="552" text-anchor="middle">JSON-RPC</text>
+  <rect class="pn" x="510" y="641" width="122" height="22" rx="11"/>
+  <text class="tn" x="571" y="656" text-anchor="middle">prices and lists</text>
+  <path class="ea" d="M 36 894 L 72 894" marker-end="url(#ma)"/>
+  <text class="lg" x="82" y="898">messages inside the app</text>
+  <path class="en" d="M 276 894 L 312 894" marker-end="url(#mn)"/>
+  <text class="lg" x="322" y="898">browser, socket and network links</text>
+</svg>

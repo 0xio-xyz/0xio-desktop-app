@@ -1,0 +1,99 @@
+{
+  "test_key": {
+    "seed_hex": "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20",
+    "pub_b64": "ebVWLo/mVPlAeLES6KmLp5AfhTrmlb7X4OORC60ElmQ=",
+    "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB"
+  },
+  "vectors": [
+    {
+      "op": "octra_circle_info",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "subject": "",
+      "message": "octra_circle_auth_v2|17:octra_circle_info|47:octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|47:oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|0:",
+      "legacy_message": "octra_circle_info|octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "sig_b64": "kBDwZ3TbR/E9TbVQuFXj8c2r3cW8BfUvj5FvicM8WyZHrkSfmcZ2XpSG4qCURUvY0OH31q+2Jpo27naJuhH3Cw=="
+    },
+    {
+      "op": "octra_circle_program_info",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "subject": "",
+      "message": "octra_circle_auth_v2|25:octra_circle_program_info|47:octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|47:oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|0:",
+      "legacy_message": "octra_circle_program_info|octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "sig_b64": "Ex+ygyimIk9BKvHV7LKzZ57BETjqDnEIBjnALTnK+xwKNxvnmUmLoRg9m8jyh+Hjb/sntE3ozJdhq5KdK0ybBg=="
+    },
+    {
+      "op": "octra_circle_asset_ciphertext_by_resource_key",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "subject": "resource_key|5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d",
+      "message": "octra_circle_auth_v2|45:octra_circle_asset_ciphertext_by_resource_key|47:octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|47:oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|77:resource_key|5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d",
+      "legacy_message": "octra_circle_asset_ciphertext_by_resource_key|octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|resource_key|5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d",
+      "sig_b64": "uobKd7EaXG4MRGEM84Y6sS2G1xUzJGFWhpxSzhdCif8jlWYOT/R5Jn5csqJq8fc63ICr9S89BVudZG7I99g8Ag=="
+    },
+    {
+      "op": "octra_circle_asset_ciphertext_by_slot_ref",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "subject": "slot_ref|slot/main",
+      "message": "octra_circle_auth_v2|41:octra_circle_asset_ciphertext_by_slot_ref|47:octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|47:oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|18:slot_ref|slot/main",
+      "legacy_message": "octra_circle_asset_ciphertext_by_slot_ref|octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|slot_ref|slot/main",
+      "sig_b64": "3LSatfqo1f8PsNbI9fb2o4pXI6xOaqtwf2It1AgubUKiMZ0OVZEwL4FcTto0kJBs7vOjXfsgRSSbJVM4boDgBQ=="
+    },
+    {
+      "op": "octra_circle_asset_ciphertext_by_state_ref",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "subject": "state_ref|state:1",
+      "message": "octra_circle_auth_v2|42:octra_circle_asset_ciphertext_by_state_ref|47:octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|47:oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|17:state_ref|state:1",
+      "legacy_message": "octra_circle_asset_ciphertext_by_state_ref|octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|state_ref|state:1",
+      "sig_b64": "8bEC02VlQilixUhPyu0NdjNiopHbniVjhITEbo5Jc8Y2van3AZCxwsY9NV6C4I/kXZa5uKRuiUjK0lhISW3WCA=="
+    },
+    {
+      "op": "octra_circle_key_policy",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "subject": "default",
+      "message": "octra_circle_auth_v2|23:octra_circle_key_policy|47:octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|47:oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|7:default",
+      "legacy_message": "octra_circle_key_policy|octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|default",
+      "sig_b64": "4sLtoOdOUmMThNZXoqFFqG2Cozej63N9G5iKcA/00e7p2QwTrs1svWISghVovcyqza0Mr3Dk/gyxnS8evW1dCw=="
+    },
+    {
+      "op": "octra_circle_storage",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "subject": "ключ|with|pipes 鍵",
+      "message": "octra_circle_auth_v2|20:octra_circle_storage|47:octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|47:oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|23:ключ|with|pipes 鍵",
+      "legacy_message": "octra_circle_storage|octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|ключ|with|pipes 鍵",
+      "sig_b64": "ojsyGK163/etU3OVUJr71Xa9lZzaxfBVrYEbtZbRsBL0ISGRQFCwU7rVDHmoMdwQ+vU5lI/5ZivH3KOcrVc5Dw=="
+    },
+    {
+      "op": "octra_circle_object_member",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "subject": "obj-1|member-2",
+      "message": "octra_circle_auth_v2|26:octra_circle_object_member|47:octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|47:oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|14:obj-1|member-2",
+      "legacy_message": "octra_circle_object_member|octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|obj-1|member-2",
+      "sig_b64": "dyDNL7WbiAulXpshn9l898S8V27PtECdrHXE8H7kd/cFf2VQs9NQ/JruDmRZNZtx8bJNJzj6gISQ9MFa3jGgDw=="
+    },
+    {
+      "op": "octra_circle_view",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "subject": "get_counter|135f17a475a61afdeeaf3759ad2e45ad1c7abb192395abe47e41fc8e395dc1a9|0",
+      "message": "octra_circle_auth_v2|17:octra_circle_view|47:octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|47:oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|78:get_counter|135f17a475a61afdeeaf3759ad2e45ad1c7abb192395abe47e41fc8e395dc1a9|0",
+      "legacy_message": "octra_circle_view|octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi|oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|get_counter|135f17a475a61afdeeaf3759ad2e45ad1c7abb192395abe47e41fc8e395dc1a9|0",
+      "sig_b64": "O9PWBxoCaPNXzTTgMlefOw+EwEAGmC/x84oIxJw+rSbsEuIioYIzvZVlRLsmeh5YFXRwShUaaIB3txXNrnXIBA=="
+    },
+    {
+      "op": "octra_circle_view",
+      "circle_id": "oct11111111111111111111111111111111111111111111",
+      "addr": "oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB",
+      "subject": "set|135f17a475a61afdeeaf3759ad2e45ad1c7abb192395abe47e41fc8e395dc1a9|1",
+      "message": "octra_circle_auth_v2|17:octra_circle_view|47:oct11111111111111111111111111111111111111111111|47:oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|70:set|135f17a475a61afdeeaf3759ad2e45ad1c7abb192395abe47e41fc8e395dc1a9|1",
+      "legacy_message": "octra_circle_view|oct11111111111111111111111111111111111111111111|oct7r3ANFFNoFyQJAtiK7JdF65mT62dXLPas7d1CEDmNvEB|set|135f17a475a61afdeeaf3759ad2e45ad1c7abb192395abe47e41fc8e395dc1a9|1",
+      "sig_b64": "bFFOAq9DqpI5I5ktDY4X4S8cN5F1dNHerZwHiW2OTZZFcEtKM+7otYOYrHqVLpoMBzjVVMJf6RwnPNuG+fRBBQ=="
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+/* The first frame, painted from index.html before any script runs. It mirrors the lock screen
+   column so the mascot stays put when the real screen takes over. */
+#boot {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg-main);
+}
+#boot .boot-lock,
+#boot .boot-start {
+  display: none;
+}
+[data-boot="start"] #boot .boot-start {
+  display: block;
+}
+[data-boot="lock"] #boot {
+  background: #090909;
+}
+[data-boot="lock"][data-theme="light"] #boot {
+  background: #f6f6f6;
+}
+[data-boot="lock"][data-theme="octra"] #boot {
+  background: var(--bg-main);
+}
+[data-boot="lock"] #boot .boot-lock {
+  display: block;
+}
+#boot .oxio-mascot {
+  display: inline-flex;
+  width: 96px;
+  height: 96px;
+}
+#boot .oxio-mascot svg {
+  overflow: visible;
+}
+#boot .oxio-mascot * {
+  animation-play-state: paused !important;
+}

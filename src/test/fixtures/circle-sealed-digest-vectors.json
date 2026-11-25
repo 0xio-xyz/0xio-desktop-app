@@ -1,0 +1,204 @@
+{
+  "digests": [
+    {
+      "name": "empty",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "key_id": "default",
+      "passphrase": "correct horse battery staple",
+      "plaintext_b64": "",
+      "salt": "[\"octra:circle:sealed_digest\",\"octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi\",\"default\"]",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "keyed": "5620792f55bc218c9a590a12aff900081c9399b5c568f99803fee899ac055035",
+      "keyed_unescaped_salt": null
+    },
+    {
+      "name": "ascii",
+      "circle_id": "octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK",
+      "key_id": "default",
+      "passphrase": "correct horse battery staple",
+      "plaintext_b64": "PCFkb2N0eXBlIGh0bWw+PHRpdGxlPmhpPC90aXRsZT4=",
+      "salt": "[\"octra:circle:sealed_digest\",\"octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK\",\"default\"]",
+      "sha256": "90572d4be39c3e0ce5e8a2db3499165267d2743669a3cc9da683fec2eef229af",
+      "keyed": "76a06bd9074a62a8b84dac8e00af5147d3d7e8ff11f0bf204440e77503c32c04",
+      "keyed_unescaped_salt": null
+    },
+    {
+      "name": "non-ascii",
+      "circle_id": "oct11111111111111111111111111111111111111111111",
+      "key_id": "default",
+      "passphrase": "correct horse battery staple",
+      "plaintext_b64": "aMOpbGxvIHfDtnJsZCwg5pel5pys6KqeIPCfmIAK",
+      "salt": "[\"octra:circle:sealed_digest\",\"oct11111111111111111111111111111111111111111111\",\"default\"]",
+      "sha256": "780597b40ccde1ce6df468a0912bbf8e772cea420fc750905cf9a73cb76c986d",
+      "keyed": "82b06c79386bc1606e9ac82b20eef48d67715def7afbc295a3bb20d0f17c5d5b",
+      "keyed_unescaped_salt": null
+    },
+    {
+      "name": "all bytes",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "key_id": "default",
+      "passphrase": "correct horse battery staple",
+      "plaintext_b64": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==",
+      "salt": "[\"octra:circle:sealed_digest\",\"octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi\",\"default\"]",
+      "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+      "keyed": "c1c6e0ee14e490f0dd343ed44d0b7a4c667c1a13ca94103a46b8f817a48ffb9d",
+      "keyed_unescaped_salt": null
+    },
+    {
+      "name": "5000 bytes",
+      "circle_id": "octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK",
+      "key_id": "default",
+      "passphrase": "correct horse battery staple",
+      "plaintext_b64": "ByZFZIOiweD/Hj1ce5q52PcWNVRzkrHQ7w4tTGuKqcjnBiVEY4KhwN/+HTxbepm41/YVNFNykbDP7g0sS2qJqMfmBSRDYoGgv979HDtaeZi31vUUM1JxkK/O7QwrSmmIp8blBCNCYYCfvt38GzpZeJe21fQTMlFwj67N7AsqSWiHpsXkAyJBYH+evdz7GjlYd5a11PMSMVBvjq3M6wopSGeGpcTjAiFAX36dvNv6GThXdpW00/IRME9ujazL6gkoR2aFpMPiASA/Xn2cu9r5GDdWdZSz0vEQL05tjKvK6QgnRmWEo8LhAB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosHg/x49XHuaudj3FjVUc5Kx0O8OLUxriqnI5wYlRGOCocDf/h08W3qZuNf2FTRTcpGwz+4NLEtqiajH5gUkQ2KBoL/e/Rw7WnmYt9b1FDNScZCvzu0MK0ppiKfG5QQjQmGAn77d/Bs6WXiXttX0EzJRcI+uzewLKkloh6bF5AMiQWB/nr3c+xo5WHeWtdTzEjFQb46tzOsKKUhnhqXE4wIhQF9+nbzb+hk4V3aVtNPyETBPbo2sy+oJKEdmhaTD4gEgP159nLva+Rg3VnWUs9LxEC9ObYyryukIJ0ZlhKPC4QAfPl18m7rZ+Bc2VXSTstHwDy5NbIuqyegHJkVkg6LB4P8ePVx7mrnY9xY1VHOSsdDvDi1Ma4qpyOcGJURjgqHA3/4dPFt6mbjX9hU0U3KRsM/uDSxLaomox+YFJENigaC/3v0cO1p5mLfW9RQzUnGQr87tDCtKaYinxuUEI0JhgJ++3fwbOll4l7bV9BMyUXCPrs3sCypJaIemxeQDIkFgf5693PsaOVh3lrXU8xIxUG+OrczrCilIZ4alxOMCIUBffp282/oZOFd2lbTT8hEwT26NrMvqCShHZoWkw+IBID9efZy72vkYN1Z1lLPS8RAvTm2Mq8rpCCdGZYSjwuEAHz5dfJu62fgXNlV0k7LR8A8uTWyLqsnoByZFZIOiweD/Hj1ce5q52PcWNVRzkrHQ7w4tTGuKqcjnBiVEY4KhwN/+HTxbepm41/YVNFNykbDP7g0sS2qJqMfmBSRDYoGgv979HDtaeZi31vUUM1JxkK/O7QwrSmmIp8blBCNCYYCfvt38GzpZeJe21fQTMlFwj67N7AsqSWiHpsXkAyJBYH+evdz7GjlYd5a11PMSMVBvjq3M6wopSGeGpcTjAiFAX36dvNv6GThXdpW00/IRME9ujazL6gkoR2aFpMPiASA/Xn2cu9r5GDdWdZSz0vEQL05tjKvK6QgnRmWEo8LhAB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosHg/x49XHuaudj3FjVUc5Kx0O8OLUxriqnI5wYlRGOCocDf/h08W3qZuNf2FTRTcpGwz+4NLEtqiajH5gUkQ2KBoL/e/Rw7WnmYt9b1FDNScZCvzu0MK0ppiKfG5QQjQmGAn77d/Bs6WXiXttX0EzJRcI+uzewLKkloh6bF5AMiQWB/nr3c+xo5WHeWtdTzEjFQb46tzOsKKUhnhqXE4wIhQF9+nbzb+hk4V3aVtNPyETBPbo2sy+oJKEdmhaTD4gEgP159nLva+Rg3VnWUs9LxEC9ObYyryukIJ0ZlhKPC4QAfPl18m7rZ+Bc2VXSTstHwDy5NbIuqyegHJkVkg6LB4P8ePVx7mrnY9xY1VHOSsdDvDi1Ma4qpyOcGJURjgqHA3/4dPFt6mbjX9hU0U3KRsM/uDSxLaomox+YFJENigaC/3v0cO1p5mLfW9RQzUnGQr87tDCtKaYinxuUEI0JhgJ++3fwbOll4l7bV9BMyUXCPrs3sCypJaIemxeQDIkFgf5693PsaOVh3lrXU8xIxUG+OrczrCilIZ4alxOMCIUBffp282/oZOFd2lbTT8hEwT26NrMvqCShHZoWkw+IBID9efZy72vkYN1Z1lLPS8RAvTm2Mq8rpCCdGZYSjwuEAHz5dfJu62fgXNlV0k7LR8A8uTWyLqsnoByZFZIOiweD/Hj1ce5q52PcWNVRzkrHQ7w4tTGuKqcjnBiVEY4KhwN/+HTxbepm41/YVNFNykbDP7g0sS2qJqMfmBSRDYoGgv979HDtaeZi31vUUM1JxkK/O7QwrSmmIp8blBCNCYYCfvt38GzpZeJe21fQTMlFwj67N7AsqSWiHpsXkAyJBYH+evdz7GjlYd5a11PMSMVBvjq3M6wopSGeGpcTjAiFAX36dvNv6GThXdpW00/IRME9ujazL6gkoR2aFpMPiASA/Xn2cu9r5GDdWdZSz0vEQL05tjKvK6QgnRmWEo8LhAB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosHg/x49XHuaudj3FjVUc5Kx0O8OLUxriqnI5wYlRGOCocDf/h08W3qZuNf2FTRTcpGwz+4NLEtqiajH5gUkQ2KBoL/e/Rw7WnmYt9b1FDNScZCvzu0MK0ppiKfG5QQjQmGAn77d/Bs6WXiXttX0EzJRcI+uzewLKkloh6bF5AMiQWB/nr3c+xo5WHeWtdTzEjFQb46tzOsKKUhnhqXE4wIhQF9+nbzb+hk4V3aVtNPyETBPbo2sy+oJKEdmhaTD4gEgP159nLva+Rg3VnWUs9LxEC9ObYyryukIJ0ZlhKPC4QAfPl18m7rZ+Bc2VXSTstHwDy5NbIuqyegHJkVkg6LB4P8ePVx7mrnY9xY1VHOSsdDvDi1Ma4qpyOcGJURjgqHA3/4dPFt6mbjX9hU0U3KRsM/uDSxLaomox+YFJENigaC/3v0cO1p5mLfW9RQzUnGQr87tDCtKaYinxuUEI0JhgJ++3fwbOll4l7bV9BMyUXCPrs3sCypJaIemxeQDIkFgf5693PsaOVh3lrXU8xIxUG+OrczrCilIZ4alxOMCIUBffp282/oZOFd2lbTT8hEwT26NrMvqCShHZoWkw+IBID9efZy72vkYN1Z1lLPS8RAvTm2Mq8rpCCdGZYSjwuEAHz5dfJu62fgXNlV0k7LR8A8uTWyLqsnoByZFZIOiweD/Hj1ce5q52PcWNVRzkrHQ7w4tTGuKqcjnBiVEY4KhwN/+HTxbepm41/YVNFNykbDP7g0sS2qJqMfmBSRDYoGgv979HDtaeZi31vUUM1JxkK/O7QwrSmmIp8blBCNCYYCfvt38GzpZeJe21fQTMlFwj67N7AsqSWiHpsXkAyJBYH+evdz7GjlYd5a11PMSMVBvjq3M6wopSGeGpcTjAiFAX36dvNv6GThXdpW00/IRME9ujazL6gkoR2aFpMPiASA/Xn2cu9r5GDdWdZSz0vEQL05tjKvK6QgnRmWEo8LhAB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosHg/x49XHuaudj3FjVUc5Kx0O8OLUxriqnI5wYlRGOCocDf/h08W3qZuNf2FTRTcpGwz+4NLEtqiajH5gUkQ2KBoL/e/Rw7WnmYt9b1FDNScZCvzu0MK0ppiKfG5QQjQmGAn77d/Bs6WXiXttX0EzJRcI+uzewLKkloh6bF5AMiQWB/nr3c+xo5WHeWtdTzEjFQb46tzOsKKUhnhqXE4wIhQF9+nbzb+hk4V3aVtNPyETBPbo2sy+oJKEdmhaTD4gEgP159nLva+Rg3VnWUs9LxEC9ObYyryukIJ0ZlhKPC4QAfPl18m7rZ+Bc2VXSTstHwDy5NbIuqyegHJkVkg6LB4P8ePVx7mrnY9xY1VHOSsdDvDi1Ma4qpyOcGJURjgqHA3/4dPFt6mbjX9hU0U3KRsM/uDSxLaomox+YFJENigaC/3v0cO1p5mLfW9RQzUnGQr87tDCtKaYinxuUEI0JhgJ++3fwbOll4l7bV9BMyUXCPrs3sCypJaIemxeQDIkFgf5693PsaOVh3lrXU8xIxUG+OrczrCilIZ4alxOMCIUBffp282/oZOFd2lbTT8hEwT26NrMvqCShHZoWkw+IBID9efZy72vkYN1Z1lLPS8RAvTm2Mq8rpCCdGZYSjwuEAHz5dfJu62fgXNlV0k7LR8A8uTWyLqsnoByZFZIOiweD/Hj1ce5q52PcWNVRzkrHQ7w4tTGuKqcjnBiVEY4KhwN/+HTxbepm41/YVNFNykbDP7g0sS2qJqMfmBSRDYoGgv979HDtaeZi31vUUM1JxkK/O7QwrSmmIp8blBCNCYYCfvt38GzpZeJe21fQTMlFwj67N7AsqSWiHpsXkAyJBYH+evdz7GjlYd5a11PMSMVBvjq3M6wopSGeGpcTjAiFAX36dvNv6GThXdpW00/IRME9ujazL6gkoR2aFpMPiASA/Xn2cu9r5GDdWdZSz0vEQL05tjKvK6QgnRmWEo8LhAB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosHg/x49XHuaudj3FjVUc5Kx0O8OLUxriqnI5wYlRGOCocDf/h08W3qZuNf2FTRTcpGwz+4NLEtqiajH5gUkQ2KBoL/e/Rw7WnmYt9b1FDNScZCvzu0MK0ppiKfG5QQjQmGAn77d/Bs6WXiXttX0EzJRcI+uzewLKkloh6bF5AMiQWB/nr3c+xo5WHeWtdTzEjFQb46tzOsKKUhnhqXE4wIhQF9+nbzb+hk4V3aVtNPyETBPbo2sy+oJKEdmhaTD4gEgP159nLva+Rg3VnWUs9LxEC9ObYyryukIJ0ZlhKPC4QAfPl18m7rZ+Bc2VXSTstHwDy5NbIuqyegHJkVkg6LB4P8ePVx7mrnY9xY1VHOSsdDvDi1Ma4qpyOcGJURjgqHA3/4dPFt6mbjX9hU0U3KRsM/uDSxLaomox+YFJENigaC/3v0cO1p5mLfW9RQzUnGQr87tDCtKaYinxuUEI0JhgJ++3fwbOll4l7bV9BMyUXCPrs3sCypJaIemxeQDIkFgf5693PsaOVh3lrXU8xIxUG+OrczrCilIZ4alxOMCIUBffp282/oZOFd2lbTT8hEwT26NrMvqCShHZoWkw+IBID9efZy72vkYN1Z1lLPS8RAvTm2Mq8rpCCdGZYSjwuEAHz5dfJu62fgXNlV0k7LR8A8uTWyLqsnoByZFZIOiweD/Hj1ce5q52PcWNVRzkrHQ7w4tTGuKqcjnBiVEY4KhwN/+HTxbepm41/YVNFNykbDP7g0sS2qJqMfmBSRDYoGgv979HDtaeZi31vUUM1JxkK/O7QwrSmmIp8blBCNCYYCfvt38GzpZeJe21fQTMlFwj67N7AsqSWiHpsXkAyJBYH+evdz7GjlYd5a11PMSMVBvjq3M6wopSGeGpcTjAiFAX36dvNv6GThXdpW00/IRME9ujazL6gkoR2aFpMPiASA/Xn2cu9r5GDdWdZSz0vEQL05tjKvK6QgnRmWEo8LhAB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosHg/x49XHuaudj3FjVUc5Kx0O8OLUxriqnI5wYlRGOCocDf/h08W3qZuNf2FTRTcpGwz+4NLEtqiajH5gUkQ2KBoL/e/Rw7WnmYt9b1FDNScZCvzu0MK0ppiKfG5QQjQmGAn77d/Bs6WXiXttX0EzJRcI+uzewLKkloh6bF5AMiQWB/nr3c+xo5WHeWtdTzEjFQb46tzOsKKUhnhqXE4wIhQF9+nbzb+hk4V3aVtNPyETBPbo2sy+oJKEdmhaTD4gEgP159nLva+Rg3VnWUs9LxEC9ObYyryukIJ0ZlhKPC4QAfPl18m7rZ+Bc2VXSTstHwDy5NbIuqyegHJkVkg6LB4P8ePVx7mrnY9xY1VHOSsdDvDi1Ma4qpyOcGJURjgqHA3/4dPFt6mbjX9hU0U3KRsM/uDSxLaomox+YFJENigaC/3v0cO1p5mLfW9RQzUnGQr87tDCtKaYinxuUEI0JhgJ++3fwbOll4l7bV9BMyUXCPrs3sCypJaIemxeQDIkFgf5693PsaOVh3lrXU8xIxUG+OrczrCilIZ4alxOMCIUBffp282/oZOFd2lbTT8hEwT26NrMvqCShHZoWkw+IBID9efZy72vkYN1Z1lLPS8RAvTm2Mq8rpCCdGZYSjwuEAHz5dfJu62fgXNlV0k7LR8A8uTWyLqsnoByZFZIOiweD/Hj1ce5q52PcWNVRzkrHQ7w4tTGuKqcjnBiVEY4KhwN/+HTxbepm41/YVNFNykbDP7g0sS2qJqMfmBSRDYoGgv979HDtaeZi31vUUM1JxkK/O7QwrSmmIp8blBCNCYYCfvt38GzpZeJe21fQTMlFwj67N7AsqSWiHpsXkAyJBYH+evdz7GjlYd5a11PMSMVBvjq3M6wopSGeGpcTjAiFAX36dvNv6GThXdpW00/IRME9ujazL6gkoR2aFpMPiASA/Xn2cu9r5GDdWdZSz0vEQL05tjKvK6QgnRmWEo8LhAB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosHg/x49XHuaudj3FjVUc5Kx0O8OLUxriqnI5wYlRGOCocDf/h08W3qZuNf2FTRTcpGwz+4NLEtqiajH5gUkQ2KBoL/e/Rw7WnmYt9b1FDNScZCvzu0MK0ppiKfG5QQjQmGAn77d/Bs6WXiXttX0EzJRcI+uzewLKkloh6bF5AMiQWA=",
+      "salt": "[\"octra:circle:sealed_digest\",\"octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK\",\"default\"]",
+      "sha256": "1e92fd98f113aba0a78e0830ca06e2775912370feab112dfc57bf3258b810595",
+      "keyed": "2602575db8e0665f4032a88faf68228dd454087ce2f674be83b62a81c397b8dc",
+      "keyed_unescaped_salt": null
+    },
+    {
+      "name": "ascii",
+      "circle_id": "octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK",
+      "key_id": "k-2",
+      "passphrase": "pässwörd 密码 😀",
+      "plaintext_b64": "PCFkb2N0eXBlIGh0bWw+PHRpdGxlPmhpPC90aXRsZT4=",
+      "salt": "[\"octra:circle:sealed_digest\",\"octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK\",\"k-2\"]",
+      "sha256": "90572d4be39c3e0ce5e8a2db3499165267d2743669a3cc9da683fec2eef229af",
+      "keyed": "32ee7f9760587ceed86209f10a86e3c5e7d14a6bbf01a010cfe4bd11a2e08eaf",
+      "keyed_unescaped_salt": null
+    },
+    {
+      "name": "non-ascii",
+      "circle_id": "oct11111111111111111111111111111111111111111111",
+      "key_id": "ключ-鍵",
+      "passphrase": "x",
+      "plaintext_b64": "aMOpbGxvIHfDtnJsZCwg5pel5pys6KqeIPCfmIAK",
+      "salt": "[\"octra:circle:sealed_digest\",\"oct11111111111111111111111111111111111111111111\",\"ключ-鍵\"]",
+      "sha256": "780597b40ccde1ce6df468a0912bbf8e772cea420fc750905cf9a73cb76c986d",
+      "keyed": "bb93dcf057430e70939e3c3644cd90c1f99ea66a964a47f7b17b2bf562de421f",
+      "keyed_unescaped_salt": null
+    },
+    {
+      "name": "all bytes",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "key_id": "q\"\\\n\t\u0001",
+      "passphrase": "correct horse battery staple",
+      "plaintext_b64": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==",
+      "salt": "[\"octra:circle:sealed_digest\",\"octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi\",\"q\\\"\\\\\\n\\t\\u0001\"]",
+      "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+      "keyed": "513b81456cec07b6c6bcd0f994f061ca421833546a122d156217293d3ef9e2e4",
+      "keyed_unescaped_salt": null
+    },
+    {
+      "name": "5000 bytes",
+      "circle_id": "octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK",
+      "key_id": "ab",
+      "passphrase": "pässwörd 密码 😀",
+      "plaintext_b64": "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",
+      "salt": "[\"octra:circle:sealed_digest\",\"octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK\",\"a\\u007fb\"]",
+      "sha256": "1e92fd98f113aba0a78e0830ca06e2775912370feab112dfc57bf3258b810595",
+      "keyed": "d6f6d191c702cc5791e1abe106a595db7be7f4ecf908af564034ceb6bd5c69cd",
+      "keyed_unescaped_salt": "451400ff73d7876017efdb73b8b376f4b3d7606757d3540334489ab9e960efd1"
+    },
+    {
+      "name": "empty",
+      "circle_id": "oct11111111111111111111111111111111111111111111",
+      "key_id": "",
+      "passphrase": "x",
+      "plaintext_b64": "",
+      "salt": "[\"octra:circle:sealed_digest\",\"oct11111111111111111111111111111111111111111111\",\"\\u007f\"]",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "keyed": "61118b4d3687115c484fd7b8bc35327189c71c49211322be82b4550ddc751dfb",
+      "keyed_unescaped_salt": "edb5de271c7698cc333201407bf14494f71136b3aedc3024bbced522a04d6698"
+    },
+    {
+      "name": "empty",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "key_id": "default",
+      "passphrase": "pässwörd 密码 😀",
+      "plaintext_b64": "",
+      "salt": "[\"octra:circle:sealed_digest\",\"octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi\",\"default\"]",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "keyed": "822b669c671aa646b2c513fe9e4a9cd20e612000d2f1372af0ff929093408ead",
+      "keyed_unescaped_salt": null
+    },
+    {
+      "name": "non-ascii",
+      "circle_id": "octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK",
+      "key_id": "default",
+      "passphrase": "x",
+      "plaintext_b64": "aMOpbGxvIHfDtnJsZCwg5pel5pys6KqeIPCfmIAK",
+      "salt": "[\"octra:circle:sealed_digest\",\"octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK\",\"default\"]",
+      "sha256": "780597b40ccde1ce6df468a0912bbf8e772cea420fc750905cf9a73cb76c986d",
+      "keyed": "2f6b86d244481836c14660a4be32ebd8a117bdebe99928b540a598206da408e8",
+      "keyed_unescaped_salt": null
+    },
+    {
+      "name": "empty",
+      "circle_id": "oct11111111111111111111111111111111111111111111",
+      "key_id": "ab",
+      "passphrase": "pässwörd 密码 😀",
+      "plaintext_b64": "",
+      "salt": "[\"octra:circle:sealed_digest\",\"oct11111111111111111111111111111111111111111111\",\"a\\u007fb\"]",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "keyed": "b0bd24062a149c48d3858ca8e0994ca3cc646f0ad8edce7579be6d9189e1b757",
+      "keyed_unescaped_salt": "7bc950f59ec1bb11a627fd25ff7f8430cd1e0e76ab770c40efc96263d9f0c4d6"
+    }
+  ],
+  "envelopes": [
+    {
+      "name": "ascii",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "key_id": "default",
+      "passphrase": "correct horse battery staple",
+      "digest_mode": "keyed",
+      "padding_class": "",
+      "plaintext_b64": "PCFkb2N0eXBlIGh0bWw+PHRpdGxlPmhpPC90aXRsZT4=",
+      "ciphertext_b64": "T0NSUzE9m1R8yoIk7AirlTmihysZla0bMURZEPqBOvLl9ZjpCv40+Lpauy0TTWm3DJ+7u1u28P6XHtQsvcGkw6IV1pBv",
+      "plaintext_hash": "9cd0543bca7a64b3daf2e04ebde741ef7bc78a5fefb27d09be0cfd611e46fb68"
+    },
+    {
+      "name": "ascii",
+      "circle_id": "octBqsZH2c1GBnBrYhUJPJHdmLuT8YMPXFpEKsPKqEYYYfi",
+      "key_id": "default",
+      "passphrase": "correct horse battery staple",
+      "digest_mode": "compatible",
+      "padding_class": "",
+      "plaintext_b64": "PCFkb2N0eXBlIGh0bWw+PHRpdGxlPmhpPC90aXRsZT4=",
+      "ciphertext_b64": "T0NSUzG/TQzfeerbx4ORlZk1GjI0PPl7y3dVFCcstCLdtRSr/aaxnUPRpNDml35/8x35mnTOMsfonChpRNrfcvNiAvu6",
+      "plaintext_hash": "90572d4be39c3e0ce5e8a2db3499165267d2743669a3cc9da683fec2eef229af"
+    },
+    {
+      "name": "non-ascii",
+      "circle_id": "octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK",
+      "key_id": "ключ-鍵",
+      "passphrase": "pässwörd 密码 😀",
+      "digest_mode": "keyed",
+      "padding_class": "4k",
+      "plaintext_b64": "aMOpbGxvIHfDtnJsZCwg5pel5pys6KqeIPCfmIAK",
+      "ciphertext_b64": "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",
+      "plaintext_hash": "a628e9efb1d5a96e38c0e4ffe8d72a3bda38f9a1dcb120b29c837976cdfe0794"
+    },
+    {
+      "name": "empty",
+      "circle_id": "oct11111111111111111111111111111111111111111111",
+      "key_id": "ab",
+      "passphrase": "correct horse battery staple",
+      "digest_mode": "keyed",
+      "padding_class": "",
+      "plaintext_b64": "",
+      "ciphertext_b64": "T0NSUzGkr8ufiCIZP9eGgi8kps3xOkcBAJ/rUvp6PVJzC+Scaw==",
+      "plaintext_hash": "771d6681ed9453c869ed8b7c2f87dae093559641ce8862fbdda6f4fd25ac3286"
+    },
+    {
+      "name": "all bytes",
+      "circle_id": "octGsV8bztVuWtMuhAgcrccxx8pS19tMbyqennJp3xegmaK",
+      "key_id": "k-2",
+      "passphrase": "x",
+      "digest_mode": "keyed",
+      "padding_class": "",
+      "plaintext_b64": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==",
+      "ciphertext_b64": "T0NSUzEYB7SouiHVHRElbrI51sq3zE+j7c+Ulk/zl+IAC75gIEqJlHjtOiJbggVb84lnCE9iapJFvQkhGPBEeqEPoyS76KSCyTvFIxi1gR2gviOMO19DJjU2kB4gr1batbkCSy0QIj7OMSItL6HyuZCDL0Vpv8tdxNGAdNM/2xbhcnaigqAdmGSrmHUKkOjeotYygbqLGbdoWQfstKEU19MR6nMiT5REIk1xTPRmWfAbcYISDDoZPRonFRqpQcmfvBjZrbLoTvX3+DNbjurRwRJmL0suLbiL9uoXybwNSLnLSVQpq2pv08cOTdHDi3D7uId8wpL7wSRWDTvGVQuoeuB90zMe6xmHL/tuq/MeUCLLr0eoE8j+6Zyzyw7rvGBGj6Wx7uM=",
+      "plaintext_hash": "9d7ffd451d09ca34ebc888c7a8d76b21639633244c0098f7f1ab98837301b2e6"
+    }
+  ]
+}

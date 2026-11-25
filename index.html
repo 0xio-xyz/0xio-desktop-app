@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="dim">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="/src/assets/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/src/assets/fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/src/assets/fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <title>0xio Desktop</title>
+    <script>
+      (function () {
+        var root = document.documentElement;
+        try {
+          var theme = localStorage.getItem("0xio_theme");
+          if (theme) root.setAttribute("data-theme", theme);
+          var vault = localStorage.getItem("0xio_boot_vault");
+          if (vault) root.setAttribute("data-boot", vault === "1" ? "lock" : "start");
+          var look = JSON.parse(localStorage.getItem("0xio_appearance_v1") || "null");
+          if (look && /^#[0-9a-f]{6}$/i.test(look.accentHex)) {
+            root.style.setProperty("--primary", look.accentHex.toLowerCase());
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="boot" aria-hidden="true">
+      <div class="boot-start absolute inset-y-0 left-0 w-[45%] lg:w-1/2 bg-[#05050A]"></div>
+      <div class="boot-lock max-w-sm w-full px-6 relative z-10">
+        <div class="text-center space-y-4">
+          <div class="flex justify-center">
+            <span class="oxio-mascot">
+              <svg class="m op wB lp3" width="96" height="96" viewBox="0 0 100 100">
+                <defs>
+                  <clipPath id="mascot-ledge-boot"><rect x="-30" y="-40" width="160" height="128" /></clipPath>
+                </defs>
+                <g clip-path="url(#mascot-ledge-boot)">
+                  <g class="mlean">
+                    <g class="wrap">
+                      <path class="arm-l body" d="M 26 41 H 18 C 18 45.95 14.04 50 6 50 C 14.04 50 18 54.05 18 59 H 26 Z" />
+                      <path class="arm-r body" d="M 74 41 H 82 C 82 45.95 85.96 50 94 50 C 85.96 50 82 54.05 82 59 H 74 Z" />
+                      <rect class="body" x="18" y="14" width="64" height="72" rx="12" />
+                      <g class="mfollow">
+                        <g class="dial">
+                          <line class="face" x1="41" y1="72" x2="59" y2="28" stroke-width="12" stroke-linecap="round" />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </span>
+          </div>
+          <h1 class="text-[1.375rem] font-bold text-content">&nbsp;</h1>
+        </div>
+        <div class="mt-8 min-h-56"></div>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

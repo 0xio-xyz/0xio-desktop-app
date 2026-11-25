@@ -1,0 +1,159 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    name: TypeScript Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Production build (catches bundler-only breakage)
+        run: npm run build
+
+  format:
+    name: Prettier Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Format check
+        run: npm run format:check
+
+  test:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test -- --passWithNoTests
+
+  # macOS minutes bill at 10x on private repos, so the Rust job only runs when
+  # something Rust-facing changed. This cheap ubuntu gate computes that.
+  rust-gate:
+    name: Rust Gate
+    if: ${{ vars.RUST_CI == 'true' }}
+    runs-on: ubuntu-latest
+    outputs:
+      run_rust: ${{ steps.diff.outputs.run_rust }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - id: diff
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="origin/${{ github.base_ref }}"
+          else
+            base="${{ github.event.before }}"
+            # New branch or force-push: no usable before-sha, run to be safe.
+            if ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+              echo "run_rust=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          if git diff --name-only "$base" HEAD | grep -qE '^(src-tauri/|\.github/workflows/ci\.yml)'; then
+            echo "run_rust=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run_rust=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  rust:
+    name: Rust Check
+    # macOS matches a real release target (release.yml builds macOS/Windows, never Linux),
+    # so platform-specific backend code is exercised honestly.
+    # Opt-in: needs a valid GH_PAT to fetch the private pvac-rs/pvac-handler crates.
+    # Set repo variable RUST_CI=true once GH_PAT is refreshed to enable it.
+    needs: rust-gate
+    if: ${{ vars.RUST_CI == 'true' && needs.rust-gate.outputs.run_rust == 'true' }}
+    runs-on: macos-latest
+    steps:
+      - name: Checkout desktop
+        uses: actions/checkout@v6
+
+      - name: Checkout pvac-rs
+        uses: actions/checkout@v6
+        with:
+          repository: 0xio-xyz/pvac-rs
+          path: pvac-rs
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Checkout pvac-handler
+        uses: actions/checkout@v6
+        with:
+          repository: 0xio-xyz/pvac-handler
+          path: pvac-handler
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Patch Cargo.toml paths for CI
+        shell: bash
+        run: |
+          sed -i.bak 's|path = "../../pvac-rs"|path = "../pvac-rs"|' src-tauri/Cargo.toml
+          sed -i.bak 's|path = "../../pvac-handler"|path = "../pvac-handler"|' src-tauri/Cargo.toml
+          rm -f src-tauri/Cargo.toml.bak
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install frontend deps
+        run: npm ci
+
+      - name: Build frontend (tauri-build embeds dist/)
+        run: npm run build
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: Clippy (compile + lint)
+        run: cargo clippy --manifest-path src-tauri/Cargo.toml
+
+      - name: Rust tests
+        run: cargo test --manifest-path src-tauri/Cargo.toml

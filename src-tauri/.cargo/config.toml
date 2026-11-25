@@ -1,0 +1,41 @@
+# Limit compiler parallelism to avoid choking the system during builds
+[build]
+jobs = 4
+
+# ── macOS Apple Silicon ──
+[target.aarch64-apple-darwin]
+# Do NOT codesign the dev binary with Entitlements.plist: keychain-access-groups is a
+# restricted entitlement, and a bare (unbundled, no provisioning profile) binary carrying
+# it is SIGKILLed by AMFI at exec - with any identity, Developer ID or ad-hoc. The linker's
+# automatic ad-hoc signature is the only one that launches. Dev therefore runs with the
+# legacy-store biometry fallback (-34018 is expected); test the real Keychain path with a
+# bundled signed build (`npx tauri build`).
+rustflags = [
+    "-C", "llvm-args=--inline-threshold=275",
+    # Hardware AES + SHA-256: all Apple Silicon has crypto extensions
+    "-C", "target-feature=+aes,+sha2",
+    # Force 64-bit field arithmetic for curve25519-dalek
+    "--cfg", "curve25519_dalek_bits=\"64\"",
+]
+
+# ── macOS Intel ──
+[target.x86_64-apple-darwin]
+rustflags = [
+    "-C", "llvm-args=--inline-threshold=275",
+    # AES-NI on x86_64
+    "-C", "target-feature=+aes",
+]
+
+# ── Linux x86_64 ──
+[target.x86_64-unknown-linux-gnu]
+rustflags = [
+    "-C", "llvm-args=--inline-threshold=275",
+    "-C", "target-feature=+aes",
+]
+
+# ── Windows x86_64 ──
+[target.x86_64-pc-windows-msvc]
+rustflags = [
+    "-C", "llvm-args=--inline-threshold=275",
+    "-C", "target-feature=+aes",
+]

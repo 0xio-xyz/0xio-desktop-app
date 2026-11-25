@@ -1,0 +1,13 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "tray",
+  "description": "Capability for the menu bar panel",
+  "windows": [
+    "tray"
+  ],
+  "permissions": [
+    "tray-window",
+    "core:event:allow-listen",
+    "core:event:allow-unlisten"
+  ]
+}

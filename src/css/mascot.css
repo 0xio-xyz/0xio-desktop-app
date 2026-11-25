@@ -1,0 +1,548 @@
+/* Same motion as the app's mascot. Scoped to .oxio-mascot, keyframes prefixed om- so nothing leaks. */
+.oxio-mascot .m .wrap {
+  transform-origin: 50px 86px;
+}
+.oxio-mascot .m .arm-l {
+  transform-origin: 18px 50px;
+}
+.oxio-mascot .m .arm-r {
+  transform-origin: 82px 50px;
+}
+.oxio-mascot .m .dial {
+  transform-origin: 50px 50px;
+}
+.oxio-mascot .m .z,
+.oxio-mascot .m .ly {
+  opacity: 0;
+}
+.oxio-mascot .s0 .face {
+  stroke-width: 5px;
+}
+.oxio-mascot .s0 .arm-l {
+  transform: skewY(-14deg);
+}
+.oxio-mascot .s0 .arm-r {
+  transform: skewY(14deg);
+}
+.oxio-mascot .s0 .wrap {
+  animation: om-breath 3000ms ease-in-out infinite;
+}
+.oxio-mascot .s0 .z1 {
+  animation: om-zf 2400ms ease-out 300ms infinite backwards;
+}
+.oxio-mascot .s0 .z2 {
+  animation: om-zf 2400ms ease-out 1100ms infinite backwards;
+}
+.oxio-mascot .s0 .z3 {
+  animation: om-zf 2400ms ease-out 1900ms infinite backwards;
+}
+.oxio-mascot .zz .face {
+  animation: om-sleepFace 1100ms ease-in-out both;
+}
+.oxio-mascot .zz .arm-l {
+  animation: om-droopL 900ms ease-in-out 200ms both;
+}
+.oxio-mascot .zz .arm-r {
+  animation: om-droopR 900ms ease-in-out 200ms both;
+}
+.oxio-mascot .zz .wrap {
+  animation:
+    om-nod 1100ms ease-in-out both,
+    om-breath 3000ms ease-in-out 1100ms infinite;
+}
+.oxio-mascot .zz .z1 {
+  animation: om-zf 2400ms ease-out 1200ms infinite backwards;
+}
+.oxio-mascot .zz .z2 {
+  animation: om-zf 2400ms ease-out 2000ms infinite backwards;
+}
+.oxio-mascot .zz .z3 {
+  animation: om-zf 2400ms ease-out 2800ms infinite backwards;
+}
+@keyframes om-breath {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale(1.02, 1.04);
+  }
+}
+@keyframes om-zf {
+  0% {
+    opacity: 0;
+    transform: translate(0, 4px);
+  }
+  20% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(5px, -8px);
+  }
+}
+@keyframes om-sleepFace {
+  0% {
+    stroke-width: 12px;
+  }
+  30% {
+    stroke-width: 6px;
+  }
+  45% {
+    stroke-width: 11px;
+  }
+  100% {
+    stroke-width: 5px;
+  }
+}
+@keyframes om-droopL {
+  from {
+    transform: none;
+  }
+  to {
+    transform: skewY(-14deg);
+  }
+}
+@keyframes om-droopR {
+  from {
+    transform: none;
+  }
+  to {
+    transform: skewY(14deg);
+  }
+}
+@keyframes om-nod {
+  0% {
+    transform: none;
+  }
+  35% {
+    transform: translateY(1px) rotate(-3deg);
+  }
+  55% {
+    transform: rotate(1deg);
+  }
+  75% {
+    transform: translateY(1px) rotate(-2deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+.oxio-mascot .wB.up .face {
+  animation: om-bFace 650ms ease-out both;
+}
+.oxio-mascot .wB.up .wrap {
+  animation: om-bBody 650ms cubic-bezier(0.3, 0.7, 0.4, 1) both;
+}
+.oxio-mascot .wB.up .arm-l {
+  animation: om-bL 650ms ease-out both;
+}
+.oxio-mascot .wB.up .arm-r {
+  animation: om-bR 650ms ease-out both;
+}
+@keyframes om-bFace {
+  0% {
+    stroke-width: 5px;
+  }
+  15%,
+  60% {
+    stroke-width: 15px;
+  }
+  100% {
+    stroke-width: 12px;
+  }
+}
+@keyframes om-bBody {
+  0% {
+    transform: none;
+  }
+  18% {
+    transform: translateY(-10px) scale(0.95, 1.07);
+  }
+  42% {
+    transform: translateY(0) scale(1.06, 0.93);
+  }
+  62% {
+    transform: translateY(-2px) scale(0.99, 1.01);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes om-bL {
+  0% {
+    transform: skewY(-14deg);
+  }
+  18% {
+    transform: translateY(-4px) skewY(55deg);
+  }
+  48% {
+    transform: skewY(20deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes om-bR {
+  0% {
+    transform: skewY(14deg);
+  }
+  18% {
+    transform: translateY(-4px) skewY(-55deg);
+  }
+  48% {
+    transform: skewY(-20deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+.oxio-mascot .op .dial {
+  animation: om-dlTurn 900ms both;
+}
+.oxio-mascot .op .wrap {
+  animation: om-dlTick 900ms linear both;
+}
+.oxio-mascot .ld .dial {
+  animation: om-dlLoop 1100ms infinite;
+}
+.oxio-mascot .ld .wrap {
+  animation: om-dlTickLoop 1100ms linear infinite;
+}
+@keyframes om-dlTurn {
+  0% {
+    transform: rotate(-240deg);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  38%,
+  52% {
+    transform: rotate(-120deg);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  88% {
+    transform: rotate(3deg);
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+@keyframes om-dlTick {
+  0%,
+  37% {
+    transform: none;
+  }
+  40% {
+    transform: translateX(1.2px);
+  }
+  45%,
+  86% {
+    transform: none;
+  }
+  89% {
+    transform: translateX(-1.2px);
+  }
+  94%,
+  100% {
+    transform: none;
+  }
+}
+@keyframes om-dlLoop {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  40%,
+  50% {
+    transform: rotate(90deg);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  90%,
+  100% {
+    transform: rotate(180deg);
+  }
+}
+@keyframes om-dlTickLoop {
+  0%,
+  39% {
+    transform: none;
+  }
+  42% {
+    transform: translateX(1.2px);
+  }
+  46%,
+  89% {
+    transform: none;
+  }
+  92% {
+    transform: translateX(-1.2px);
+  }
+  96%,
+  100% {
+    transform: none;
+  }
+}
+.oxio-mascot .en .lyA {
+  animation: om-enA 1600ms infinite;
+}
+.oxio-mascot .en .lyB {
+  animation: om-enB 1600ms infinite;
+}
+.oxio-mascot .en .wrap {
+  animation: om-enPress 1600ms infinite;
+}
+.oxio-mascot .de .lyA {
+  animation: om-deA 1600ms cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+.oxio-mascot .de .lyB {
+  animation: om-deB 1600ms cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+.oxio-mascot .de .wrap {
+  animation: om-deLift 1600ms ease-out infinite;
+}
+@keyframes om-enA {
+  0% {
+    transform: translateY(-24px);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  22% {
+    transform: translateY(-16px);
+    opacity: 0.35;
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  74% {
+    transform: none;
+    opacity: 0.35;
+  }
+  84%,
+  100% {
+    transform: none;
+    opacity: 0;
+  }
+}
+@keyframes om-enB {
+  0% {
+    transform: translateY(-14px);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  18% {
+    transform: translateY(-8px);
+    opacity: 0.6;
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  70% {
+    transform: none;
+    opacity: 0.6;
+  }
+  80%,
+  100% {
+    transform: none;
+    opacity: 0;
+  }
+}
+@keyframes om-enPress {
+  0%,
+  70% {
+    transform: none;
+  }
+  80% {
+    transform: scaleY(0.96);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes om-deA {
+  0% {
+    transform: none;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.35;
+  }
+  70% {
+    transform: translateY(-16px);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(-24px);
+    opacity: 0;
+  }
+}
+@keyframes om-deB {
+  0% {
+    transform: none;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  60% {
+    transform: translateY(-8px);
+    opacity: 0.6;
+  }
+  90%,
+  100% {
+    transform: translateY(-12px);
+    opacity: 0;
+  }
+}
+@keyframes om-deLift {
+  0% {
+    transform: none;
+  }
+  12% {
+    transform: scale(0.98, 1.03);
+  }
+  30%,
+  100% {
+    transform: none;
+  }
+}
+.oxio-mascot .m.lp3.wB.up .wrap {
+  animation:
+    om-bBody 650ms cubic-bezier(0.3, 0.7, 0.4, 1) both,
+    om-awLean 5200ms ease 650ms infinite;
+}
+.oxio-mascot .m.lp3.wB.up .face {
+  animation:
+    om-bFace 650ms ease-out both,
+    om-awBlink3 5200ms linear 650ms infinite;
+}
+.oxio-mascot .m.lp3.wB.up .arm-l {
+  animation: om-bL 650ms ease-out both;
+}
+.oxio-mascot .m.lp3.wB.up .arm-r {
+  animation: om-bR 650ms ease-out both;
+}
+.oxio-mascot .m.lp3.wB.up .dial {
+  animation: om-awLook 5200ms ease 650ms infinite;
+}
+.oxio-mascot .m.lp3.op .wrap {
+  animation:
+    om-dlTick 900ms linear both,
+    om-awLean 5200ms ease 900ms infinite;
+}
+.oxio-mascot .m.lp3.op .face {
+  animation: om-awBlink3 5200ms linear 900ms infinite;
+}
+.oxio-mascot .m.lp3.op .dial {
+  animation:
+    om-dlTurn 900ms both,
+    om-awLook 5200ms ease 900ms infinite;
+}
+@keyframes om-awLook {
+  0%,
+  8% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  20%,
+  40% {
+    transform: translateX(-5px);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  52%,
+  58% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  70%,
+  88% {
+    transform: translateX(5px);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes om-awLean {
+  0%,
+  8% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  20%,
+  40% {
+    transform: rotate(-2deg);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  52%,
+  58% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  70%,
+  88% {
+    transform: rotate(2deg);
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes om-awBlink3 {
+  0%,
+  52%,
+  60%,
+  100% {
+    stroke-width: 12px;
+  }
+  55% {
+    stroke-width: 3px;
+  }
+  57% {
+    stroke-width: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .oxio-mascot .m * {
+    animation: none !important;
+  }
+  .oxio-mascot .ly {
+    display: none;
+  }
+}
+.oxio-mascot .mfollow {
+  transform-origin: 50px 50px;
+  transition: transform 320ms cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+.oxio-mascot .mlean {
+  transform-origin: 50px 86px;
+  transition: transform 420ms cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+.oxio-mascot {
+  --mascot-body: var(--text-main);
+}
+[data-theme="light"] .oxio-mascot {
+  --mascot-body: var(--primary);
+}
+.oxio-mascot .body {
+  fill: var(--mascot-body);
+}
+.oxio-mascot .face {
+  stroke: var(--mascot-cut, var(--bg-main));
+}
+.oxio-mascot .z {
+  stroke: var(--mascot-body);
+}
+.oxio-mascot .ly {
+  fill: none;
+  stroke: var(--mascot-body);
+  stroke-width: 1.4px;
+  vector-effect: non-scaling-stroke;
+}
+@media (prefers-reduced-motion: reduce) {
+  .oxio-mascot * {
+    animation: none !important;
+  }
+  .oxio-mascot .mfollow,
+  .oxio-mascot .mlean {
+    transition: none;
+  }
+}

@@ -1,0 +1,275 @@
+name: Build & Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version — must match package.json / tauri.conf.json / Cargo.toml (e.g. 0.3.0)"
+        required: true
+        default: "0.3.0"
+      notes:
+        description: "What's new, shown in the in-app update prompt (optional, plain text)"
+        required: false
+        default: ""
+      trial:
+        description: "Build only: no release, no tag, nothing published. Files are kept as workflow artifacts."
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos-latest
+            target: universal-apple-darwin
+            rust_targets: aarch64-apple-darwin,x86_64-apple-darwin
+            label: macos-universal
+          - platform: windows-latest
+            target: x86_64-pc-windows-msvc
+            rust_targets: x86_64-pc-windows-msvc
+            label: windows-x64
+
+    runs-on: ${{ matrix.platform }}
+    permissions:
+      contents: write
+    env:
+      # Sign + notarize macOS only when the credentials are configured; otherwise the
+      # build falls back to an ad-hoc (unsigned, un-notarized) artifact and still succeeds.
+      MAC_SIGN: ${{ secrets.APPLE_CERTIFICATE != '' && secrets.APPLE_API_KEY_P8 != '' }}
+
+    steps:
+      - name: Checkout desktop
+        uses: actions/checkout@v6
+
+      # The app displays __APP_VERSION__ (from package.json) and the bundle is versioned by
+      # tauri.conf.json — a mismatched input would tag a release that lies about its version.
+      - name: Verify version consistency
+        shell: bash
+        run: |
+          set -euo pipefail
+          V="${{ github.event.inputs.version }}"
+          PKG=$(node -p "require('./package.json').version")
+          CONF=$(node -p "require('./src-tauri/tauri.conf.json').version")
+          CARGO=$(grep -m1 '^version' src-tauri/Cargo.toml | sed 's/.*"\(.*\)"/\1/')
+          echo "input=$V package.json=$PKG tauri.conf=$CONF Cargo.toml=$CARGO"
+          [ "$V" = "$PKG" ] && [ "$V" = "$CONF" ] && [ "$V" = "$CARGO" ] || {
+            echo "::error::Version mismatch — bump package.json, src-tauri/tauri.conf.json, and src-tauri/Cargo.toml to $V first."
+            exit 1
+          }
+
+      - name: Checkout pvac-rs
+        uses: actions/checkout@v6
+        with:
+          repository: 0xio-xyz/pvac-rs
+          path: pvac-rs
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Checkout pvac-handler
+        uses: actions/checkout@v6
+        with:
+          repository: 0xio-xyz/pvac-handler
+          path: pvac-handler
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Patch Cargo.toml paths for CI
+        shell: bash
+        run: |
+          sed -i.bak 's|path = "../../pvac-rs"|path = "../pvac-rs"|' src-tauri/Cargo.toml
+          sed -i.bak 's|path = "../../pvac-handler"|path = "../pvac-handler"|' src-tauri/Cargo.toml
+          rm -f src-tauri/Cargo.toml.bak
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.rust_targets }}
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      # ── macOS code signing + notarization (only when secrets are present) ──
+      - name: Import Developer ID certificate
+        if: contains(matrix.platform, 'macos') && env.MAC_SIGN == 'true'
+        uses: apple-actions/import-codesign-certs@v7
+        with:
+          p12-file-base64: ${{ secrets.APPLE_CERTIFICATE }}
+          p12-password: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+
+      - name: Write App Store Connect API key
+        if: contains(matrix.platform, 'macos') && env.MAC_SIGN == 'true'
+        shell: bash
+        # Notarization env is exported HERE (not on the build step) so the variables
+        # simply don't exist in unsigned builds — Tauri checks env presence, not
+        # emptiness, and notarytool rejects --issuer '' as an invalid UUID.
+        run: |
+          echo "${{ secrets.APPLE_API_KEY_P8 }}" | base64 --decode > "$RUNNER_TEMP/AuthKey.p8"
+          {
+            echo "APPLE_API_ISSUER=${{ secrets.APPLE_API_ISSUER }}"
+            echo "APPLE_API_KEY=${{ secrets.APPLE_API_KEY_ID }}"
+            echo "APPLE_API_KEY_PATH=$RUNNER_TEMP/AuthKey.p8"
+          } >> "$GITHUB_ENV"
+
+      - name: Ad-hoc sign fallback (no signing secrets)
+        if: contains(matrix.platform, 'macos') && env.MAC_SIGN != 'true'
+        shell: bash
+        run: |
+          sed -i.bak 's/"signingIdentity":.*/"signingIdentity": "-"/' src-tauri/tauri.conf.json
+          rm -f src-tauri/tauri.conf.json.bak
+
+      - name: Install frontend deps
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Build Tauri
+        if: ${{ !inputs.trial }}
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Updater signing (minisign) — produces the signed *.app.tar.gz for auto-update.
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          # Notarization env (APPLE_API_*) is injected via $GITHUB_ENV by the
+          # "Write App Store Connect API key" step, only when MAC_SIGN == 'true'.
+        with:
+          tagName: v${{ github.event.inputs.version }}
+          releaseName: "0xio Desktop v${{ github.event.inputs.version }}"
+          releaseBody: "Desktop wallet release v${{ github.event.inputs.version }}"
+          releaseDraft: true
+          prerelease: true
+          args: '--target ${{ matrix.target }} --config {"bundle":{"createUpdaterArtifacts":true}}'
+
+      - name: Build Tauri (trial, no release)
+        if: ${{ inputs.trial }}
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          args: '--target ${{ matrix.target }} --config {"bundle":{"createUpdaterArtifacts":true}}'
+
+      - name: Verify universal binary
+        if: contains(matrix.platform, 'macos')
+        shell: bash
+        run: |
+          set -euo pipefail
+          APP=$(find "src-tauri/target/${{ matrix.target }}/release/bundle/macos" -maxdepth 1 -name '*.app' | head -1)
+          lipo "$APP/Contents/MacOS/oxio-desktop" -verify_arch arm64 x86_64
+          lipo -archs "$APP/Contents/MacOS/oxio-desktop"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: desktop-${{ matrix.label }}
+          path: |
+            src-tauri/target/${{ matrix.target }}/release/bundle/**/*.dmg
+            src-tauri/target/${{ matrix.target }}/release/bundle/**/*.msi
+            src-tauri/target/${{ matrix.target }}/release/bundle/**/*.msi.sig
+            src-tauri/target/${{ matrix.target }}/release/bundle/**/*.app.tar.gz
+            src-tauri/target/${{ matrix.target }}/release/bundle/**/*.app.tar.gz.sig
+          retention-days: 30
+
+  # ── Publish to the 0xio-desktop R2 bucket (binaries + updater manifest) ──
+  # Set the R2_BUCKET secret to "0xio-desktop". The alpha portal's bucket is being retired:
+  # downloads and the updater are both served by 0xio.xyz now (/api/download, /api/updates).
+  # Runs only when the R2 credentials are configured. NEEDS A VALIDATION RUN before
+  # relying on it — uploads are live to the bucket the site serves from.
+  publish-r2:
+    name: Publish to R2
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ needs.build.result == 'success' && vars.R2_ENABLED == 'true' && !inputs.trial }}
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: auto
+      R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      R2_BUCKET: ${{ secrets.R2_BUCKET }}
+      VERSION: ${{ github.event.inputs.version }}
+      NOTES: ${{ github.event.inputs.notes }}
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v8
+        with:
+          path: artifacts
+
+      - name: Locate artifacts
+        id: find
+        shell: bash
+        run: |
+          set -euo pipefail
+          DMG=$(find artifacts -name '*.dmg' | head -1)
+          MSI=$(find artifacts -name '*.msi' | head -1)
+          MSISIG=$(find artifacts -name '*.msi.sig' | head -1)
+          TGZ=$(find artifacts -name '*.app.tar.gz' | head -1)
+          SIG=$(find artifacts -name '*.app.tar.gz.sig' | head -1)
+          echo "dmg=$DMG" >> "$GITHUB_OUTPUT"
+          echo "msi=$MSI" >> "$GITHUB_OUTPUT"
+          echo "msisig=$MSISIG" >> "$GITHUB_OUTPUT"
+          echo "tgz=$TGZ" >> "$GITHUB_OUTPUT"
+          echo "sig=$SIG" >> "$GITHUB_OUTPUT"
+
+      - name: Upload binaries + updater bundle to R2
+        shell: bash
+        run: |
+          set -euo pipefail
+          s3() { aws s3 cp "$1" "s3://$R2_BUCKET/$2" --endpoint-url "$R2_ENDPOINT"; }
+          # `if`, not `[ -n .. ] && ..`: under `set -e` a short-circuited `&&` on the last line
+          # makes the whole step exit non-zero, so a run missing one platform's artifact failed
+          # the publish even though it had uploaded everything it actually had.
+          if [ -n "${{ steps.find.outputs.dmg }}" ]; then
+            s3 "${{ steps.find.outputs.dmg }}" "desktop/0xio-desktop-macos-universal.dmg"
+            aws s3 rm "s3://$R2_BUCKET/desktop/0xio-desktop-macos-arm64.dmg" --endpoint-url "$R2_ENDPOINT"
+          fi
+          if [ -n "${{ steps.find.outputs.msi }}" ]; then
+            s3 "${{ steps.find.outputs.msi }}" "desktop/0xio-desktop-windows-x64.msi"
+          fi
+          if [ -n "${{ steps.find.outputs.tgz }}" ]; then
+            s3 "${{ steps.find.outputs.tgz }}" "desktop/updates/0xio-Desktop-${VERSION}-universal.app.tar.gz"
+          fi
+          # Windows updater consumes the (signed) .msi itself — versioned copy under updates/
+          if [ -n "${{ steps.find.outputs.msisig }}" ]; then
+            s3 "${{ steps.find.outputs.msi }}" "desktop/updates/0xio-Desktop-${VERSION}-x64.msi"
+          fi
+
+      - name: Build + upload updater latest.json (darwin-aarch64 + darwin-x86_64 + windows-x86_64)
+        if: ${{ steps.find.outputs.sig != '' || steps.find.outputs.msisig != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          MAC_SIG=""; [ -n "${{ steps.find.outputs.sig }}" ] && MAC_SIG=$(cat "${{ steps.find.outputs.sig }}")
+          WIN_SIG=""; [ -n "${{ steps.find.outputs.msisig }}" ] && WIN_SIG=$(cat "${{ steps.find.outputs.msisig }}")
+          PUB_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          jq -n --arg v "$VERSION" --arg n "$NOTES" --arg msig "$MAC_SIG" --arg wsig "$WIN_SIG" --arg d "$PUB_DATE" \
+            '{version:$v, notes:(if $n != "" then $n else ("0xio Desktop v"+$v) end), pub_date:$d,
+              platforms: (
+                (if $msig != "" then ({key:("desktop/updates/0xio-Desktop-"+$v+"-universal.app.tar.gz"), signature:$msig} | {"darwin-aarch64":., "darwin-x86_64":.}) else {} end)
+                + (if $wsig != "" then {"windows-x86_64":{key:("desktop/updates/0xio-Desktop-"+$v+"-x64.msi"), signature:$wsig}} else {} end)
+              )}' \
+            > latest.json
+          aws s3 cp latest.json "s3://$R2_BUCKET/desktop/updates/latest.json" --endpoint-url "$R2_ENDPOINT"
+
+      - name: Bump manifest.json desktop versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          aws s3 cp "s3://$R2_BUCKET/manifest.json" manifest.json --endpoint-url "$R2_ENDPOINT" || echo "{}" > manifest.json
+          jq --arg v "$VERSION" \
+            '(.["desktop/0xio-desktop-macos-universal.dmg"]) = ((.["desktop/0xio-desktop-macos-universal.dmg"] // .["desktop/0xio-desktop-macos-arm64.dmg"] // {}) + {version:$v, description:"macOS (Apple silicon and Intel)"})
+             | del(.["desktop/0xio-desktop-macos-arm64.dmg"])
+             | (.["desktop/0xio-desktop-windows-x64.msi"].version) = $v' \
+            manifest.json > manifest.new.json
+          mv manifest.new.json manifest.json
+          aws s3 cp manifest.json "s3://$R2_BUCKET/manifest.json" --endpoint-url "$R2_ENDPOINT"
