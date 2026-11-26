@@ -8,7 +8,7 @@
 <p align="center">
   <a href="https://github.com/0xio-xyz/0xio-desktop-app/actions/workflows/ci.yml"><img src="https://github.com/0xio-xyz/0xio-desktop-app/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License MIT"></a>
-  <a href="https://x.com/0xio_xyz"><img src="https://img.shields.io/badge/X-%400xio__xyz-000000?logo=x" alt="X"></a>
+  <a href="https://x.com/0xiodotxyz"><img src="https://img.shields.io/badge/X-%400xiodotxyz-000000?logo=x" alt="X"></a>
 </p>
 
 # 0xio Desktop
